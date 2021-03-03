@@ -47,15 +47,15 @@
 									// token和用户信息存入localstorage
 									uni.setStorage({
 										key: "token",
-										value: res.data.token,
+										data: res.data.token,
 										success: function() {
-                      console.log(res.data.token)
+											console.log(res.data.token)
 											console.log('token本地保存成功');
 										}
 									})
 									uni.setStorage({
 										key: "userinfo",
-										value: userinfo,
+										data: userinfo,
 										success: function() {
 											console.log('用户信息本地保存成功');
 										}
