@@ -37,7 +37,7 @@
 								// 后端请求地址 GET https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
 								// 请求后获得 openid 和 密钥
 								// url: 'https://yiyv.miniapp.client.everdo.cn/auth/wxlogin',
-								url: 'http://测试地址/auth/wxlogin',
+								url: 'http://127.0.0.1:5000/auth/wxlogin',
 								method: 'GET',
 								data: {
 									code: res.code,
@@ -47,8 +47,9 @@
 									// token和用户信息存入localstorage
 									uni.setStorage({
 										key: "token",
-										value: res.token,
+										value: res.data.token,
 										success: function() {
+                      console.log(res.data.token)
 											console.log('token本地保存成功');
 										}
 									})
