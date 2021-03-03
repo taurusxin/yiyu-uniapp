@@ -1,0 +1,1 @@
+<view class="content data-v-57280228"><view class="button-demo data-v-57280228"><u-button vue-id="8dd740cc-1" ripple="{{true}}" open-type="getUserInfo" data-event-opts="{{[['^getuserinfo',[['trydoLogin']]]]}}" bind:getuserinfo="__e" class="data-v-57280228" bind:__l="__l" vue-slots="{{['default']}}">登录测试</u-button></view></view>
