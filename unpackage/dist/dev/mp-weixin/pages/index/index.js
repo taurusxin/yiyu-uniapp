@@ -153,7 +153,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -167,28 +167,54 @@ var _default =
 {
   data: function data() {
     return {};
-
   },
   onLoad: function onLoad() {
 
   },
   methods: {
     trydoLogin: function trydoLogin(e) {
+      // 获取用户信息
       var userinfo = e.detail.userInfo;
       console.log(userinfo);
       console.log("获取用户信息成功");
+      // wx.login需要在获取用户信息后才能调用
       wx.login({
         success: function success(res) {
           console.log("微信登录发起");
           console.log(res);
           if (res.code) {
-            //发起网络请求
-            wx.request({
-              url: 'https://api.everdo.com/onLogin',
+            // 发起网络请求
+            // 小程序密钥 AppSecret：06281bb8b4f5fc0024f8fedb6674349a
+            // 小程序ID APPID: wx518df2bfc44d1a33
+            // api地址已定：yiyv.miniapp.client.everdo.cn
+            // 使用unirequest代替wx.request
+            uni.request({
+              // url: 'https://yiyv.miniapp.client.everdo.cn/auth/wxlogin',
+              url: 'http://测试地址/auth/wxlogin',
+              method: 'GET',
               data: {
                 code: res.code,
-                userinfo: userinfo } });
+                userinfo: userinfo },
 
+              success: function success(res) {
+                // token和用户信息存入localstorage
+                uni.setStorage({
+                  key: "token",
+                  value: res.token,
+                  success: function success() {
+                    console.log('token本地保存成功');
+                  } });
+
+                uni.setStorage({
+                  key: "userinfo",
+                  value: userinfo,
+                  success: function success() {
+                    console.log('用户信息本地保存成功');
+                  } });
+
+              },
+              fail: function fail() {},
+              complete: function complete() {} });
 
           } else {
             console.log('登录失败！' + res.errMsg);
@@ -196,6 +222,7 @@ var _default =
         } });
 
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

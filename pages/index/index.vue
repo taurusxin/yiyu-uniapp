@@ -4,41 +4,67 @@
 		<view class="button-demo">
 			<u-button :ripple="true" @getuserinfo="trydoLogin" open-type="getUserInfo">登录测试</u-button>
 		</view>
-	
+
 	</view>
 </template>
 
 <script>
 	export default {
 		data() {
-			return {
-			}
+			return {}
 		},
 		onLoad() {
 
 		},
 		methods: {
 			trydoLogin(e) {
+				// 获取用户信息
 				let userinfo = e.detail.userInfo
 				console.log(userinfo)
 				console.log("获取用户信息成功")
+				// wx.login需要在获取用户信息后才能调用
 				wx.login({
-				  success (res) {
-					  console.log("微信登录发起")
-					  console.log(res)
-				    if (res.code) {
-				      //发起网络请求
-				      wx.request({
-				        url: 'https://api.everdo.com/onLogin',
-				        data: {
-				          code: res.code,
-						  userinfo: userinfo
-				        }
-				      })
-				    } else {
-				      console.log('登录失败！' + res.errMsg)
-				    }
-				  }
+					success(res) {
+						console.log("微信登录发起")
+						console.log(res)
+						if (res.code) {
+							// 发起网络请求
+							// 小程序密钥 AppSecret：06281bb8b4f5fc0024f8fedb6674349a
+							// 小程序ID APPID: wx518df2bfc44d1a33
+							// api地址已定：yiyv.miniapp.client.everdo.cn
+							// 使用unirequest代替wx.request
+							uni.request({
+								// url: 'https://yiyv.miniapp.client.everdo.cn/auth/wxlogin',
+								url: 'http://测试地址/auth/wxlogin',
+								method: 'GET',
+								data: {
+									code: res.code,
+									userinfo: userinfo
+								},
+								success: res => {
+									// token和用户信息存入localstorage
+									uni.setStorage({
+										key: "token",
+										value: res.token,
+										success: function() {
+											console.log('token本地保存成功');
+										}
+									})
+									uni.setStorage({
+										key: "userinfo",
+										value: userinfo,
+										success: function() {
+											console.log('用户信息本地保存成功');
+										}
+									})
+								},
+								fail: () => {},
+								complete: () => {}
+							});
+						} else {
+							console.log('登录失败！' + res.errMsg)
+						}
+					}
 				})
 			}
 		}
