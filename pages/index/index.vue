@@ -34,6 +34,8 @@
 							// api地址已定：yiyv.miniapp.client.everdo.cn
 							// 使用unirequest代替wx.request
 							uni.request({
+								// 后端请求地址 GET https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
+								// 请求后获得 openid 和 密钥
 								// url: 'https://yiyv.miniapp.client.everdo.cn/auth/wxlogin',
 								url: 'http://测试地址/auth/wxlogin',
 								method: 'GET',
