@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { formatDayTime, teacherData } from './common.js';
+import formatDayTime from './common.js';
 const oneDayTimeStamp = 86400000; // 一天的时间戳
 const now = new Date();
 const todayDayTimeStamp = now.getTime(); //今天的时间戳
@@ -135,6 +135,7 @@ export default {
 			],
 			num: 0, // 记录周数，下一周加一，上一周减一, 0:本周
 			isCard: false, // 卡片是否铺满全屏
+            // 获取今天日期
 			time: now.toISOString().slice(0, 10),
 			mondayDayTimeStamp: 0, // 星期一的时间戳
 			sundayDayTimeStamp: 0 // 星期天的时间戳,
@@ -145,13 +146,17 @@ export default {
 	},
 	methods: {
 		tabSelect(e) {
+            // 今天是星期几
 			this.week = +e.currentTarget.dataset.id + 1;
+            // 当前选择的日期
 			this.time = formatDayTime(this.mondayDayTimeStamp + oneDayTimeStamp * (this.week - 1));
 			console.log('星期' + this.week);
 		},
 		async previousWeek() {
 			console.log('上一周');
+            // 切换周数后默认选择星期一
 			this.week = 1;
+            // 周数减一
 			this.num = this.num - 1;
 			if (this.num === 0) this.num === -1;
 			if (this.num >= 0) {
@@ -163,14 +168,6 @@ export default {
 			}
 			this.dayList();
 			this.time = formatDayTime(this.mondayDayTimeStamp);
-			// const teacherdata = await teacherData({
-			// 	data: {
-			// 		startTime: this.mondayDayTimeStamp,
-			// 		endTime: this.sundayDayTimeStamp
-			// 	}
-			// });
-			// const { data } = teacherdata.data;
-			// this.list = Object.values(data);
 		},
 		async nextWeek() {
 			console.log('下一周');
@@ -186,28 +183,12 @@ export default {
 			}
 			this.dayList();
 			this.time = formatDayTime(this.mondayDayTimeStamp);
-			// const teacherdata = await teacherData({
-			// 	data: {
-			// 		startTime: this.mondayDayTimeStamp,
-			// 		endTime: this.sundayDayTimeStamp
-			// 	}
-			// });
-			// const { data } = teacherdata.data;
-			// this.list = Object.values(data);
 		},
 		async thisWeek() {
 			console.log('本周');
 			this.mondayDayTimeStamp = todayDayTimeStamp - oneDayTimeStamp * (getDay - 1); // 星期一的时间戳
 			this.sundayDayTimeStamp = (7 - getDay) * oneDayTimeStamp + todayDayTimeStamp; //星期天的时间戳
 			this.dayList();
-			// const teacherdata = await teacherData({
-			// 	data: {
-			// 		startTime: this.mondayDayTimeStamp,
-			// 		endTime: this.sundayDayTimeStamp
-			// 	}
-			// });
-			// const { data } = teacherdata.data;
-			// this.list = Object.values(data);
 		},
 		dayList() {
 			// 获取本周日期
