@@ -48,7 +48,7 @@
 			</view>
 			<view class="flex justify-center" style="margin-top: 260rpx;">
 				<image
-					src="../../static/not.png"
+					src="./not.png"
 					mode=""
 					v-if="item.length === 0"
 					class=""
