@@ -1,14 +1,10 @@
 // 全局请求封装
 // 相当于一个拦截器
-let token = uni.getStorageSync('token');
+const token = uni.getStorageSync('token');
 
-if (token != null) {
-    let header = {
-        token: token
-    };
-} else {
-    let header = {};
-}
+const header = {
+    token: token
+};
 
 export default (uri, method, data) => {
     uni.showLoading({
@@ -16,8 +12,9 @@ export default (uri, method, data) => {
     });
 
     return new Promise((resolve, reject) => {
+
         uni.request({
-            url: "https://yiyv.miniapp.client.everdo.cn/api" + uri,
+            url: "https://yiyv.miniapp.client.everdo.cn/api/" + uri,
             method: method,
             header: header,
             data: data,
