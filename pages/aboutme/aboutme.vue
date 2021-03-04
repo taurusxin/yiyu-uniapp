@@ -1,15 +1,17 @@
 <template>
 	<view class="center">
 		<view class="center_top">
-			<view class="mask"></view>
+			<view class="mask">
+            </view>
 		</view>
 		<view class="center_box_bg">
 			<view class="profily">
 				<view class="base">
+					<!-- <view class="profily_header" :style="`background-image:url('${avatarurl}');`"> -->
 					<view class="profily_header">
-
+                        <!-- :src="this.avatarurl" -->
 					</view>
-					<text>昵称</text>
+					<text>{{nickname}}</text>
 					<image src="../../static/fumou-center-template/setting.png" mode=""></image>
 				</view>
 				<view class="order_status">
@@ -33,9 +35,12 @@
 </template>
 
 <script>
+    import $Storage from "../../common/storage.js"
 	export default {
 		data() {
 			return {
+                avatarurl:"../../static/fumou-center-template/header.jpg",
+                nickname:"您未登录",
 				status: [{
 						key: 1,
 						name: '待发货',
@@ -96,7 +101,20 @@
 		},
 		computed: {
 
-		}
+		},
+        onShow() {
+            console.log($Storage.getUserinfo())
+            let userinfo = $Storage.getUserinfo()
+            
+            if(userinfo == null){
+                this.nickname = "您未登录"
+                this.avatarurl = "../../static/fumou-center-template/header.jpg"
+            }else{
+                this.nickname = userinfo.nickName
+                this.avatarurl = userinfo.avatarUrl
+                console.log(this.avatarurl)
+            }
+        }
 	}
 </script>
 

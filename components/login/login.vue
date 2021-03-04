@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import Storage from "../../common/storage.js"
+    import $Storage from "../../common/storage.js"
     export default {
         data() {
             return {}
@@ -42,9 +42,9 @@
                                 },
                                 success: res => {
                                     // token和用户信息存入localstorage
-                                    Storage.setToken(res.data.token)
+                                    $Storage.setToken(res.data.token)
                                     console.log('token本地保存成功:' + res.data.token);
-                                    Storage.setUserinfo(userinfo)
+                                    $Storage.setUserinfo(userinfo)
                                     console.log('用户信息本地保存成功');
                                 },
                                 fail: () => {},
