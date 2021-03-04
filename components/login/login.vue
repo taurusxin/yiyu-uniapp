@@ -1,7 +1,11 @@
 <template>
-    <view class="button-login">
-        <u-button :ripple="true" @getuserinfo="trydoLogin" open-type="getUserInfo">登录测试</u-button>
-        <u-button @click="getStorage">缓存测试</u-button>
+    <view class="button">
+        <u-button type="success" ripple="true" plain="true" class="loginbutton" :ripple="true" @getuserinfo="trydoLogin"
+            open-type="getUserInfo">
+            <u-icon name="weixin-fill" style="margin-right: 20rpx;">
+            </u-icon>微信一键登录
+        </u-button>
+        <!-- <u-button @click="getStorage">缓存测试</u-button> -->
     </view>
 </template>
 
@@ -15,11 +19,20 @@
 
         },
         methods: {
-            getStorage(){
-                let token = $Storage.getToken()
-                console.log(token)
+            goPage() {
+                // 登录成功后跳转tabbar
+                uni.switchTab({
+                    url: '../../pages/index/index',
+                    success: res => {},
+                    fail: () => {},
+                    complete: () => {
+                        console.log("跳转回主页面")
+                    }
+                });
             },
             trydoLogin(e) {
+                // 去掉下面一行跳转tabbar不会生效
+                let _this = this
                 // 获取用户信息
                 let userinfo = e.detail.userInfo
                 console.log(userinfo)
@@ -51,6 +64,8 @@
                                     console.log('token本地保存成功:' + res.data.token);
                                     $Storage.setUserinfo(userinfo)
                                     console.log('用户信息本地保存成功');
+
+                                    _this.goPage()
                                 },
                                 fail: () => {},
                                 complete: () => {}
@@ -66,7 +81,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .button-login {
-        margin-top: 80rpx;
+    .button {
+        width: 550rpx;
     }
 </style>

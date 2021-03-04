@@ -6,6 +6,7 @@ export default (uri, method, data) => {
         title: "加载中"
     });
     
+    // 一定要放在 export default 内
     let token = uni.getStorageSync('token');
     
     let header = {
