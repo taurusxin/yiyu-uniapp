@@ -6,11 +6,8 @@
 		</view>
 		<view class="center_box_bg">
 			<view class="profily">
-				<view class="base">
-					<!-- <view class="profily_header" :style="`background-image:url('${avatarurl}');`"> -->
-					<view class="profily_header">
-                        <!-- :src="this.avatarurl" -->
-					</view>
+				<view class="base">  
+                    <u-avatar :src="avatarurl"></u-avatar>
 					<text>{{nickname}}</text>
 					<image src="../../static/fumou-center-template/setting.png" mode=""></image>
 				</view>
@@ -106,7 +103,7 @@
             console.log($Storage.getUserinfo())
             let userinfo = $Storage.getUserinfo()
             
-            if(userinfo == null){
+            if(userinfo == null || userinfo.length == 0){
                 this.nickname = "您未登录"
                 this.avatarurl = "../../static/fumou-center-template/header.jpg"
             }else{

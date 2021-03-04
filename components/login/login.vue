@@ -34,7 +34,7 @@
                                 // 后端请求地址 GET https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
                                 // 请求后获得 openid 和 密钥
                                 // url: 'https://yiyv.miniapp.client.everdo.cn/auth/wxlogin',
-                                url: 'http://192.168.255.79:5000/auth/wxlogin',
+                                url: 'http://192.168.12.79:5000/auth/wxlogin',
                                 method: 'GET',
                                 data: {
                                     code: res.code,
