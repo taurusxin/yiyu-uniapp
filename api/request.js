@@ -1,15 +1,17 @@
 // 全局请求封装
 // 相当于一个拦截器
-const token = uni.getStorageSync('token');
-
-const header = {
-    token: token
-};
 
 export default (uri, method, data) => {
     uni.showLoading({
         title: "加载中"
     });
+    
+    let token = uni.getStorageSync('token');
+    
+    let header = {
+        token: token
+    };
+    
 
     return new Promise((resolve, reject) => {
 
