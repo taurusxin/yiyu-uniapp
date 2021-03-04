@@ -165,12 +165,6 @@
 		border-bottom: 2px solid #F6F6F6;
 		padding-bottom: 35upx;
 		position: relative;
-		.profily_header {
-			height: 120upx;
-			width: 120upx;
-			background-image: url('../../static/fumou-center-template/header.jpg');
-			background-size: 100%;
-		}
 
 		text {
 			margin-left: 20px;

@@ -15,7 +15,16 @@
 				"navigationBarTitleText": "我的"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/classtable/classtable",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "课程表",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uView",
@@ -28,14 +37,19 @@
 	    "borderStyle": "black",
 	    "backgroundColor": "#ffffff",
 	    "list": [{
-	        "pagePath": "pages/index/index",
-	        "iconPath": "static/index.png",
-	        "selectedIconPath": "static/index-selected.png",
-	        "text": "首页"
+	        "pagePath": "pages/classtable/classtable",
+	        "iconPath": "static/tab/kecheng_off.png",
+	        "selectedIconPath": "static/tab/kecheng.png",
+	        "text": "课表"
 	    }, {
+	        "pagePath": "pages/index/index",
+	        "iconPath": "static/tab/faxian_off.png",
+	        "selectedIconPath": "static/tab/faxian.png",
+	        "text": "发现"
+	    },{
 	        "pagePath": "pages/aboutme/aboutme",
-	        "iconPath": "static/center.png",
-	        "selectedIconPath": "static/center-selected.png",
+	        "iconPath": "static/tab/me_off.png",
+	        "selectedIconPath": "static/tab/me.png",
 	        "text": "我的"
 	    }]
 	}
