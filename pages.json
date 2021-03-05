@@ -95,6 +95,51 @@
             }
             
         }
+        ,{
+            "path" : "pages/do_print/do_print",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "代打印",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/do_goods/do_goods",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "拿外卖",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/do_deliver/do_deliver",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "拿快递",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/do_join/do_join",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/do_help/do_help",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

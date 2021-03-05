@@ -6,27 +6,27 @@
             <u-swiper @tap="goClassDesc" :list="swiper_list" :effect3d="true" height="350" bg-color="#FFFFFF"></u-swiper>
         </view>
         <u-grid :col="3">
-            <u-grid-item>
+            <u-grid-item @click="goPage('/pages/do_print/do_print')">
                 <image style="width: 100rpx; height: 100rpx;" src="../../static/indexapp/i_print.png"></image>
                 <view class="grid-text">代打印</view>
             </u-grid-item>
-            <u-grid-item>
+            <u-grid-item @click="goPage('/pages/do_goods/do_goods')">
                 <image style="width: 100rpx; height: 100rpx;" src="../../static/indexapp/i_goods.png"></image>
                 <view class="grid-text">取外卖</view>
             </u-grid-item>
-            <u-grid-item>
-                <image style="width: 100rpx; height: 100rpx;" src="../../static/indexapp/i_diliver.png"></image>
+            <u-grid-item @click="goPage('/pages/do_deliver/do_deliver')">
+                <image style="width: 100rpx; height: 100rpx;" src="../../static/indexapp/i_deliver.png"></image>
                 <view class="grid-text">取快递</view>
             </u-grid-item>
-            <u-grid-item>
+            <u-grid-item @click="goClassesTab">
                 <image style="width: 100rpx; height: 100rpx;" src="../../static/indexapp/i_class.png"></image>
                 <view class="grid-text">看课表</view>
             </u-grid-item>
-            <u-grid-item>
+            <u-grid-item @click="goPage('/pages/do_join/do_join')">
                 <image style="width: 100rpx; height: 100rpx;" src="../../static/indexapp/i_join.png"></image>
                 <view class="grid-text">加入我们</view>
             </u-grid-item>
-            <u-grid-item>
+            <u-grid-item @click="goPage('/pages/do_help/do_help')">
                 <image style="width: 100rpx; height: 100rpx;" src="../../static/indexapp/i_help.png"></image>
                 <view class="grid-text">帮助</view>
             </u-grid-item>
@@ -65,6 +65,23 @@
             }
         },
         methods: {
+            goClassesTab(){
+              uni.switchTab({
+                  url: "/pages/classtable/classtable",
+                  success: res => {},
+                  fail: () => {},
+                  complete: () => {}
+              })  
+            },
+            goPage(e) {
+                console.log("准备跳转地址" + e)
+                uni.navigateTo({
+                    url: e,
+                    success: res => {},
+                    fail: () => {},
+                    complete: () => {}
+                });
+            },
             // goLogin() {
             //     uni.navigateTo({
             //         url: "../login/login",
