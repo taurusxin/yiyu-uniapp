@@ -75,6 +75,12 @@
                         console.log(this.form)
 
                         // 这里写异步请求
+                        $api.setPersonSetting(this.form).then((res) => {
+                            console.log("成功提交数据到服务端")
+                        }).catch((e) => {
+                            console.log("提交数据到服务端失败")
+                            console.log(e)
+                        })
                     } else {
                         console.log('验证失败');
                     }
