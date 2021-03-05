@@ -6,7 +6,7 @@
                 <u-input v-model="form.name" />
             </u-form-item>
             <u-form-item label="性别" prop="sex">
-                <u-input v-model="form.sex" type="select"  @click="show = true" />
+                <u-input v-model="form.sex" type="select" @click="show = true" />
                 <u-action-sheet :list="sexSheetList" v-model="show" @click="sexSheetCallback"></u-action-sheet>
             </u-form-item>
             <!-- 后期有条件改成获取手机号 -->
@@ -38,6 +38,7 @@
                         required: true,
                         min: 2,
                         message: '请输入姓名',
+                        type: 'string',
                         // 可以单个或者同时写两个触发验证方式 
                         trigger: ['change', 'blur'],
                     }],
@@ -49,8 +50,9 @@
                     }],
                     phone: [{
                         min: 11,
-                        max:11,
+                        max: 11,
                         required: true,
+                        type: 'number',
                         message: '请正确输入手机号',
                         trigger: ['change', 'blur'],
                     }]
@@ -81,9 +83,9 @@
             sexSheetCallback(index) {
                 // this.form.school = this.schoolSheetList[index].text;
                 if (index == 0) {
-                    this.form.sex = "man"
+                    this.form.sex = "男"
                 } else {
-                    this.form.sex = "women"
+                    this.form.sex = "女"
                 }
                 console.log("已选择的性别为：" + this.form.sex)
             }

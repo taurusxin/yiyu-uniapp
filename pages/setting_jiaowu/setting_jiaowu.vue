@@ -2,7 +2,7 @@
     <view class="content">
 
         <u-form :model="form" ref="uForm">
-            <u-form-item label="选择学校" prop="school" label-width="150">
+            <u-form-item label="选择学校 / 简称" prop="school" label-width="250">
                 <u-input v-model="form.school" type="select" @click="show = true" />
                 <u-action-sheet :list="schoolSheetList" v-model="show" @click="schoolSheetCallback"></u-action-sheet>
             </u-form-item>
@@ -41,7 +41,8 @@
                     }],
                     snumber: [{
                         required: true,
-                        message: '请输入学号',
+                        type: 'number',
+                        message: '请正确输入学号',
                         // 可以单个或者同时写两个触发验证方式 
                         trigger: ['change', 'blur'],
                     }],
