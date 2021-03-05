@@ -39,10 +39,12 @@
 </template>
 
 <script>
+    import $api from "../../api/api.js"
     import $Storage from "../../common/storage.js"
     export default {
         data() {
             return {
+                // 后期要删掉这里的原始数据
                 swiper_list: [{
                         image: 'https://cdn.uviewui.com/uview/swiper/1.jpg',
                         title: '昨夜星辰昨夜风，画楼西畔桂堂东'
@@ -63,8 +65,20 @@
             if ($Storage.getToken() == null || $Storage.getToken().length == 0) {
                 this.goLogin()
             }
+            this.getSwiperData()
         },
         methods: {
+            getSwiperData() {
+            	$api.getIndexSwiper().then(
+            		res => {
+            			console.log(res.data)
+            			//获取头图
+            			this.swiper_list = res.data.swiper_list
+            		},
+            	).catch(
+            		err => {}
+            	)
+            },
             goClassesTab(){
               uni.switchTab({
                   url: "/pages/classtable/classtable",
