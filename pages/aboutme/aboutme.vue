@@ -37,7 +37,7 @@
                                 <u-switch slot="right-icon" v-model="setting_remind" @change="switchRemind"></u-switch>
                             </u-cell-item>
                             <u-cell-item icon="edit-pen" title="教务绑定" :arrow="true" @click="goPage('/pages/setting_jiaowu/setting_jiaowu')"></u-cell-item>
-                            <u-cell-item icon="edit-pen" title="个人信息" :arrow="true" @click="goPage('/pages/setting_person/setting_person')"></u-cell-item>
+                            <u-cell-item icon="account" title="个人信息" :arrow="true" @click="goPage('/pages/setting_person/setting_person')"></u-cell-item>
                             <u-cell-item icon="map" title="地址管理" :arrow="true" @click="goPage('/pages/setting_addr/setting_addr')"></u-cell-item>
                         </u-cell-group>
                     </view>

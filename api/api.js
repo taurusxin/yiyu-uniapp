@@ -15,6 +15,9 @@ export default {
     },
     getJwxtSetting(){
         return request("api/setting_jwxt", "GET", )
+    },
+    getPersonSetting(){
+        return request("api/setting_person", "GET", )
     }
     
 }
