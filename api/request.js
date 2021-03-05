@@ -17,7 +17,7 @@ export default (uri, method, data) => {
     return new Promise((resolve, reject) => {
 
         uni.request({
-            url: "https://yiyv.miniapp.client.everdo.cn/api/" + uri,
+            url: "https://yiyv.miniapp.client.everdo.cn/" + uri,
             method: method,
             header: header,
             data: data,

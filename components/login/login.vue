@@ -1,5 +1,6 @@
 <template>
     <view class="button">
+        <u-modal v-model="toastwindow.show" :content="toastwindow.content"></u-modal>
         <u-button type="success" ripple="true" plain="true" class="loginbutton" :ripple="true" @getuserinfo="trydoLogin"
             open-type="getUserInfo">
             <u-icon name="weixin-fill" style="margin-right: 20rpx;">
@@ -13,16 +14,25 @@
     import $Storage from "../../common/storage.js"
     export default {
         data() {
-            return {}
+            return {
+                toastwindow: {
+                    show: false,
+                    content: ""
+                },
+            }
         },
         onLoad() {
 
         },
         methods: {
+            showWindow(content) {
+                this.toastwindow.show = true,
+                    this.toastwindow.content = content
+            },
             goPage() {
                 // 登录成功后跳转tabbar
                 uni.switchTab({
-                    url: '../../pages/index/index',
+                    url: '/pages/index/index',
                     success: res => {},
                     fail: () => {},
                     complete: () => {
@@ -64,11 +74,17 @@
                                     console.log('token本地保存成功:' + res.data.token);
                                     $Storage.setUserinfo(userinfo)
                                     console.log('用户信息本地保存成功');
-
                                     _this.goPage()
                                 },
-                                fail: () => {},
-                                complete: () => {}
+                                fail: () => {
+                                    console.log('登录失败');
+                                    // 增加登录失败提示
+                                    _this.showWindow("登录失败，重启小程序再试！")
+                                },
+                                complete: () => {
+                                    console.log('登录过程结束');
+                                    // _this.goPage()
+                                }
                             });
                         } else {
                             console.log('登录失败！' + res.errMsg)

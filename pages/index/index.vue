@@ -1,7 +1,6 @@
 <template>
     <view class="content">
         <!-- 引入登录按钮组件 -->
-
         <button type="default" @click="goLogin">登录页面测试</button>
 
     </view>
