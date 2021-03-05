@@ -12,5 +12,9 @@ export default {
             "range": time
         }
         return request("api/classtable", "GET", data)
+    },
+    getJwxtSetting(){
+        return request("api/setting_jwxt", "GET", )
     }
+    
 }

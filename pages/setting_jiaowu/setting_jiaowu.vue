@@ -14,16 +14,19 @@
             </u-form-item>
         </u-form>
         <view style="margin-top: 90rpx;">
-            <u-button @click="submit" type="primary" plain>提交</u-button>
+            <u-button v-if="binded" @click="submit" type="primary" plain>重新绑定</u-button>
+            <u-button v-else @click="submit" type="primary" plain>提交绑定</u-button>
         </view>
 
     </view>
 </template>
 
 <script>
+    import $api from "../../api/api.js"
     export default {
         data() {
             return {
+                binded: false,
                 form: {
                     school: '',
                     snumber: '',
@@ -68,7 +71,7 @@
                     if (valid) {
                         console.log('验证通过');
                         console.log(this.form)
-                        
+
                         // 这里写异步请求
                     } else {
                         console.log('验证失败');
@@ -88,12 +91,27 @@
         // 必须要在onReady生命周期，因为onLoad生命周期组件可能尚未创建完毕
         onReady() {
             this.$refs.uForm.setRules(this.rules);
+        },
+        onLoad() {
+            // 页面启动的时候先向服务端拉去已有数据
+            $api.getJwxtSetting().then((res) => {
+                console.log(res)
+                if (res.statusCode == 200) {
+                    this.form = res.data.form
+                    // 说明用户之前绑定过教务系统
+                    this.binded = true
+                } else {
+                    console.log("状态码不为200，用户之前还没绑定")
+                }
+            }).catch((err) => {
+                console.log(err)
+            })
         }
     };
 </script>
 
 <style lang="scss" scoped>
     .content {
-        padding: 20rpx;
+        padding: 30rpx;
     }
 </style>
