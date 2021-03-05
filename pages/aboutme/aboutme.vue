@@ -36,9 +36,9 @@
                             <u-cell-item icon="bell" title="课表提醒" :arrow="false">
                                 <u-switch slot="right-icon" v-model="setting_remind" @change="switchRemind"></u-switch>
                             </u-cell-item>
-                            <u-cell-item icon="edit-pen" title="教务绑定" :arrow="true"></u-cell-item>
-                            <u-cell-item icon="edit-pen" title="个人信息" :arrow="true"></u-cell-item>
-                            <u-cell-item icon="map" title="地址管理" :arrow="true"></u-cell-item>
+                            <u-cell-item icon="edit-pen" title="教务绑定" :arrow="true" @click="goPage('/pages/setting_jiaowu/setting_jiaowu')"></u-cell-item>
+                            <u-cell-item icon="edit-pen" title="个人信息" :arrow="true" @click="goPage('/pages/setting_person/setting_person')"></u-cell-item>
+                            <u-cell-item icon="map" title="地址管理" :arrow="true" @click="goPage('/pages/setting_addr/setting_addr')"></u-cell-item>
                         </u-cell-group>
                     </view>
                     <view style="margin-top: 20rpx;">
@@ -68,19 +68,19 @@
                         key: 1,
                         name: '待发货',
                         url: '../../static/fumou-center-template/one.png',
-                        addr: '/pages/setting_jiaowu/setting_jiaowu'
+                        addr: '/pages/me_dfh/me_dfh'
                     },
                     {
                         key: 2,
                         name: '待收货',
                         url: '../../static/fumou-center-template/2.png',
-                        addr: ''
+                        addr: '/pages/me_dsh/me_dsh'
                     },
                     {
                         key: 3,
                         name: '全部订单',
                         url: '../../static/fumou-center-template/4.png',
-                        addr: ''
+                        addr: '/pages/me_orders/me_orders'
                     },
                     {
                         key: 4,

@@ -33,6 +33,68 @@
             }
             
         }
+        ,{
+            "path" : "pages/setting_jiaowu/setting_jiaowu",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "教务系统绑定",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/kefu/kefu",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "客服",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/setting_person/setting_person",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "个人信息",
+                "enablePullDownRefresh": false
+            }
+        }
+        ,{
+            "path" : "pages/setting_addr/setting_addr",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "地址管理",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/me_dfh/me_dfh",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "代发货订单",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/me_dsh/me_dsh",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "代收货订单",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/me_orders/me_orders",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的订单",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
