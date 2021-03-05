@@ -44,7 +44,7 @@
     export default {
         data() {
             return {
-                // 后期要删掉这里的原始数据
+                // 后期要删掉这里的数据
                 swiper_list: [{
                         image: 'https://cdn.uviewui.com/uview/swiper/1.jpg',
                         title: '昨夜星辰昨夜风，画楼西畔桂堂东'
