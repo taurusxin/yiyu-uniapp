@@ -13,6 +13,15 @@ export default {
         }
         return request("api/classtable", "GET", data)
     },
+    getReminder(status) {
+        return request("api/reminder", "GET", )
+    },
+    setReminder(status) {
+        let data = {
+            "mind": status
+        }
+        return request("api/reminder", "POST", data)
+    },
     getJwxtSetting(){
         return request("api/setting_jwxt", "GET", )
     },

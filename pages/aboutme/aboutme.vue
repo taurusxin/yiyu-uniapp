@@ -53,6 +53,7 @@
 </template>
 
 <script>
+    import $api from "../../api/api.js"
     import $Storage from "../../common/storage.js"
     export default {
         data() {
@@ -92,6 +93,11 @@
             };
         },
         methods: {
+            getReminder() {
+                $api.getReminder().then(res => {
+                    this.setting_remind = res.data.setting_remind
+                })
+            },
             goPage(e) {
                 console.log("准备跳转地址" + e)
                 uni.navigateTo({
@@ -109,11 +115,24 @@
                 console.log("课表提醒状态：" + e)
                 if (e) {
                     // 此处需要API，成功后显示window
-                    this.showWindow("课表提醒已开启")
+                    $api.setReminder(true).then((res) => {
+                        // 最好判断200
+                        this.showWindow("课表提醒已开启")
+                    }).catch((err) => {
+                        console.log(err)
+                        this.showWindow("开启失败（网络错误）")
+                    })
                 } else {
                     // 此处需要API，成功后显示window
-                    this.showWindow("课表提醒已关闭")
+                    $api.setReminder(false).then((res) => {
+                        // 最好判断200
+                        this.showWindow("课表提醒已关闭")
+                    }).catch((err) => {
+                        console.log(err)
+                        this.showWindow("关闭失败（网络错误）")
+                    })
                 }
+                this.getReminder()
             }
         },
         computed: {
@@ -131,6 +150,9 @@
                 this.avatarurl = userinfo.avatarUrl
                 console.log(this.avatarurl)
             }
+        },
+        onLoad() {
+            this.getReminder()
         }
     }
 </script>
