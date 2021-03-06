@@ -121,13 +121,13 @@
 	.addSite {
 		display: flex;
 		justify-content: space-around;
-		width: 600rpx;
-		line-height: 80rpx;
+		width: 300rpx;
+		line-height: 100rpx;
 		position: absolute;
-		bottom: 90rpx;
-		left: 80rpx;
+		bottom: 100rpx;
+		left: 225rpx;
 		background-color: #5797ff;
-		border-radius: 60rpx;
+		border-radius: 220rpx;
 		font-size: 30rpx;
 
 		.add {
