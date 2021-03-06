@@ -96,14 +96,14 @@
                     complete: () => {}
                 });
             },
-            // goLogin() {
-            //     uni.navigateTo({
-            //         url: "../login/login",
-            //         success: res => {},
-            //         fail: () => {},
-            //         complete: () => {}
-            //     });
-            // }
+            goLogin() {
+                uni.navigateTo({
+                    url: "../login/login",
+                    success: res => {},
+                    fail: () => {},
+                    complete: () => {}
+                });
+            }
         }
     }
 </script>

@@ -140,6 +140,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/setting_addsite/setting_addsite",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "设置地址",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
