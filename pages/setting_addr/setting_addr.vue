@@ -14,9 +14,14 @@
 				<u-icon name="edit-pen" :size="40" color="#999999"></u-icon>
 			</view>
 		</view>
-		<view class="addSite" @tap="toAddSite">
+		<view class="addSite" @tap="toAddSite" v-if="siteList.length<3">
 			<view class="add">
 				<u-icon name="plus" color="#ffffff" class="icon" :size="30"></u-icon>新建收货地址
+			</view>
+		</view>
+		<view class="cantAdd" v-else>
+			<view class="add">
+				最多添加三个地址
 			</view>
 		</view>
 	</view>
@@ -34,32 +39,39 @@
 		},
 		methods: {
 			getData() {
+				// 从后端拿取地址数据
+				// api写这里
+				
+				
+				
 				this.siteList = [{
-						id: 1,
+						id: 0,
 						name: '游X',
 						phone: '183****5523',
 						site: '广东省深圳市宝安区 自由路66号'
 					},
 					{
-						id: 2,
+						id: 1,
 						name: '李XX',
 						phone: '183****5555',
 						site: '广东省深圳市宝安区 翻身路xx号'
-					},
-					{
-						id: 3,
-						name: '王YY',
-						phone: '153****5555',
-						site: '广东省深圳市宝安区 平安路13号'
 					}
+					// ,
+					// {
+					// 	id: 2,
+					// 	name: '王YY',
+					// 	phone: '153****5555',
+					// 	site: '广东省深圳市宝安区 平安路13号'
+					// }
 				];
 			},
+			// 地址编号为 0，1，2
 			toAddSite() {
 				uni.navigateTo({
-					url: '/pages/setting_addsite/setting_addsite'
+					url: '/pages/setting_addsite/setting_addsite?add=' + this.siteList.length
 				});
 			},
-			toEidtSite(index){
+			toEidtSite(index) {
 				uni.navigateTo({
 					url: '/pages/setting_addsite/setting_addsite?add=' + index
 				});
@@ -127,6 +139,29 @@
 		bottom: 100rpx;
 		left: 225rpx;
 		background-color: #5797ff;
+		border-radius: 220rpx;
+		font-size: 30rpx;
+
+		.add {
+			display: flex;
+			align-items: center;
+			color: #ffffff;
+
+			.icon {
+				margin-right: 10rpx;
+			}
+		}
+	}
+
+	.cantAdd {
+		display: flex;
+		justify-content: space-around;
+		width: 300rpx;
+		line-height: 100rpx;
+		position: absolute;
+		bottom: 100rpx;
+		left: 225rpx;
+		background-color: #8ebbff;
 		border-radius: 220rpx;
 		font-size: 30rpx;
 

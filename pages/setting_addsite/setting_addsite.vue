@@ -9,34 +9,31 @@
 				<view class="left">手机号码</view>
 				<input type="text" v-model="form.phone" placeholder-class="line" placeholder="请填写收货人手机号" />
 			</view>
-			<view class="item" @tap="showRegionPicker">
+			<!-- 			<view class="item" @tap="showRegionPicker">
 				<view class="left">所在地区</view>
 				<input disabled v-model="form.area" type="text" placeholder-class="line" placeholder="省市区县、乡镇等" />
+			</view> -->
+
+			<view class="item" @tap="showRegionPicker">
+				<view class="left">所在地区</view>
+				<input disabled v-model="form.area" type="text" placeholder-class="line" placeholder="选择收货学校" />
 			</view>
+
 			<view class="item address">
 				<view class="left">详细地址</view>
 				<textarea v-model="form.addr" type="text" placeholder-class="line" placeholder="街道、楼牌等" />
 			</view>
-			<!-- <view class="site-clipboard">
-				<textarea placeholder-class="line" value="" placeholder="粘贴文本,可自动识别姓名和地址等" />
-				<view class="clipboard">
-					地址粘贴板
-					<u-icon name="arrow-down" class="icon" :size="20"></u-icon>
-				</view>
-			</view> -->
 		</view>
 		<view class="bgroup">
 			<view style="width: 300rpx;">
-				<u-button type="info" plain>返回</u-button>
+				<u-button type="info" plain @click="back">返回</u-button>
 			</view>
 			<view style="width: 300rpx;">
 				<u-button type="primary" plain @click="save">保存</u-button>
 			</view>
-
-
-
 		</view>
-		<u-picker mode="region" ref="uPicker" v-model="show" @confirm="pickeraddr" :default-region="form.area" />
+		<u-select v-model="show" :list="schoolSheetList" @confirm="confirmRegionPicker"></u-select>
+		<!-- <u-picker mode="region" ref="uPicker" v-model="show" @confirm="pickeraddr" :default-region="form.area" /> -->
 
 	</view>
 </template>
@@ -53,19 +50,42 @@
 					// area: ['浙江省', '宁波市', '鄞州区'],
 					area: [],
 					addr: ''
-				}
+				},
+
+				schoolSheetList: [{
+						value: '1',
+						label: '华南农业大学珠江学院'
+					},
+					{
+						value: '2',
+						label: '北京大学'
+					},
+					{
+						value: '3',
+						label: '清华大学'
+					}
+				],
+
 			};
 		},
 		methods: {
+			back() {
+				uni.navigateBack()
+			},
 			save() {
 				console.log(this.form)
 			},
-			pickeraddr(item) {
-				// pircker 的回调参数
-				// console.log(item)
-				this.form.area.push(item.province.label)
-				this.form.area.push(item.city.label)
-				this.form.area.push(item.area.label)
+			// pickeraddr(item) {
+			//	// 地区选择器回调 
+			// 	// pircker 的回调参数
+			// 	// console.log(item)
+			// 	this.form.area.push(item.province.label)
+			// 	this.form.area.push(item.city.label)
+			// 	this.form.area.push(item.area.label)
+			// },
+			confirmRegionPicker(e) {
+				console.log("选择了：" + e[0].label);
+				this.form.area = e[0].label
 			},
 			showRegionPicker() {
 				this.show = true;
