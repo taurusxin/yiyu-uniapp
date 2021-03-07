@@ -44,7 +44,9 @@
 				// api写这里
 
 				$api.getPersonAddr().then(res => {
-					this.siteList = res.data.siteList
+					if(res.statusCode == 200){
+						this.siteList = res.data.siteList
+					}
 				}).catch(e => {})
 
 				this.siteList = [{
