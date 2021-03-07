@@ -10,7 +10,7 @@ export default (uri, method, data) => {
     let token = uni.getStorageSync('token');
     
     let header = {
-        ContentType: 'application/x-www-form-urlencoded',
+        'content-type': 'application/x-www-form-urlencoded',
         token: token
     };
     
