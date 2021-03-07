@@ -1,29 +1,26 @@
 <template>
 	<view class="wrap">
 		<view class="top">
-			<view class="item">
-				<view class="left">收货人</view>
-				<input type="text" v-model="form.name" placeholder-class="line" placeholder="请填写收货人姓名" />
-			</view>
-			<view class="item">
-				<view class="left">手机号码</view>
-				<input type="text" v-model="form.phone" placeholder-class="line" placeholder="请填写收货人手机号" />
-			</view>
-			<!-- 			<view class="item" @tap="showRegionPicker">
-				<view class="left">所在地区</view>
-				<input disabled v-model="form.area" type="text" placeholder-class="line" placeholder="省市区县、乡镇等" />
-			</view> -->
-
-			<view class="item" @tap="showRegionPicker">
-				<view class="left">所在地区</view>
-				<input disabled v-model="form.area" type="text" placeholder-class="line" placeholder="选择收货学校" />
-			</view>
-
-			<view class="item address">
-				<view class="left">详细地址</view>
-				<textarea v-model="form.addr" type="text" placeholder-class="line" placeholder="街道、楼牌等" />
-			</view>
+			<u-form :model="form" ref="uForm">
+				<u-form-item label="收货人" prop="name" label-width="140">
+					<u-input type="text" v-model="form.name" placeholder-class="line" placeholder="请填写收货人姓名" />
+				</u-form-item>
+				<u-form-item label="手机号码" prop="phone" label-width="140">
+					<u-input type="number" v-model="form.phone" placeholder-class="line" placeholder="请填写收货人手机号" />
+				</u-form-item>
+				<u-form-item label="收货校区" prop="area" label-width="140" @tap="showRegionPicker">
+					<u-input type="text" v-model="form.area" placeholder-class="line" placeholder="选择收货学校" disabled
+						@click="showRegionPicker" />
+				</u-form-item>
+				<u-form-item label="详细地址" prop="addr" label-width="140" class="item address">
+					<view style="width: 520rpx;">
+						<u-input v-model="form.addr" type="textarea" :border="true" height="200" :auto-height="true"
+							placeholder="宿舍号 / 教学楼等" placeholder-class="line" />
+					</view>
+				</u-form-item>
+			</u-form>
 		</view>
+
 		<view class="bgroup">
 			<view style="width: 300rpx;">
 				<u-button type="info" plain @click="back">返回</u-button>
@@ -34,7 +31,6 @@
 		</view>
 		<u-select v-model="show" :list="schoolSheetList" @confirm="confirmRegionPicker"></u-select>
 		<!-- <u-picker mode="region" ref="uPicker" v-model="show" @confirm="pickeraddr" :default-region="form.area" /> -->
-
 	</view>
 </template>
 
@@ -52,7 +48,6 @@
 					area: '',
 					addr: ''
 				},
-
 				schoolSheetList: [{
 						value: '1',
 						label: '华南农业大学珠江学院'
@@ -66,6 +61,34 @@
 						label: '清华大学'
 					}
 				],
+				rules: {
+					name: [{
+						required: true,
+						message: '请输入正确的姓名',
+						min: 2,
+						max: 5,
+						trigger: ['blur', 'change']
+					}],
+					phone: [{
+						required: true,
+						type: 'number',
+						min: 11,
+						max: 11,
+						message: '请输入正确的手机号',
+						trigger: ['change', 'blur']
+					}],
+					area: [{
+						required: true,
+						message: '请选择校区',
+						trigger: ['change', 'blur']
+					}],
+					addr: [{
+						min: 5,
+						required: true,
+						message: '请输入详细地址(或再写详细点)',
+						trigger: ['change', 'blur']
+					}]
+				},
 
 			};
 		},
@@ -74,12 +97,19 @@
 				uni.navigateBack()
 			},
 			save() {
-				// 保存时提交数据给后端
-				console.log("保存地址到后端，表单如下")
-				console.log(this.form)
-				$api.setPersonAddrByIndex(this.form).then(res => {
-					console.log(res)
-				}).catch(e => {})
+				this.$refs.uForm.validate(valid => {
+					if (valid) {
+						console.log('验证通过');
+						// 保存时提交数据给后端
+						console.log("保存地址到后端，表单如下")
+						console.log(this.form)
+						$api.setPersonAddrByIndex(this.form).then(res => {
+							console.log(res)
+						}).catch(e => {})
+					} else {
+						console.log('验证失败');
+					}
+				});
 			},
 			// pickeraddr(item) {
 			//	// 地区选择器回调 
@@ -107,6 +137,10 @@
 					this.form = res.form
 				}
 			}).catch(e => {})
+		},
+		// 必须要在onReady生命周期，因为onLoad生命周期组件可能尚未创建完毕
+		onReady() {
+			this.$refs.uForm.setRules(this.rules);
 		}
 	};
 </script>
@@ -153,44 +187,10 @@
 			}
 
 			.address {
-				padding: 20rpx 0;
+				padding: 20rpx 0rpx;
 
-				textarea {
-					// width: 100%;
-					height: 150rpx;
-					background-color: #f7f7f7;
-					line-height: 60rpx;
-					margin: 40rpx auto;
-					padding: 20rpx;
-				}
 			}
 
-			.site-clipboard {
-				padding-right: 40rpx;
-
-				textarea {
-					// width: 100%;
-					height: 150rpx;
-					background-color: #f7f7f7;
-					line-height: 60rpx;
-					margin: 40rpx auto;
-					padding: 20rpx;
-				}
-
-				.clipboard {
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					font-size: 26rpx;
-					color: $u-tips-color;
-					height: 80rpx;
-
-					.icon {
-						margin-top: 6rpx;
-						margin-left: 10rpx;
-					}
-				}
-			}
 		}
 
 		.bottom {
