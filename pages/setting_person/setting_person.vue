@@ -76,7 +76,12 @@
 
                         // 这里写异步请求
                         $api.setPersonSetting(this.form).then((res) => {
-                            console.log("成功提交数据到服务端")
+                            if (res.statusCode == 200) {
+                                console.log("成功提交数据到服务端，正在返回")
+                                uni.navigateBack()
+                            } else {
+                                console.log("提交数据到服务端失败")
+                            }
                         }).catch((e) => {
                             console.log("提交数据到服务端失败")
                             console.log(e)
