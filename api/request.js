@@ -24,6 +24,15 @@ export default (uri, method, data) => {
             data: data,
             success(res) {
                 console.log("请求成功")
+                if(res.statusCode == 401){
+                    console.log("服务端 token 过期")
+                    uni.navigateTo({
+                        url: "../login/login",
+                        success: res => {},
+                        fail: () => {},
+                        complete: () => {}
+                    });
+                }
                 resolve(res);
             },
             fail(err) {
