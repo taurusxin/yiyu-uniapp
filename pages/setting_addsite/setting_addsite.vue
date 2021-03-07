@@ -12,10 +12,10 @@
 					<u-input type="text" v-model="form.area" placeholder-class="line" placeholder="选择收货学校" disabled
 						@click="showRegionPicker" />
 				</u-form-item>
-				<u-form-item label="详细地址" prop="addr" label-width="140" class="item address">
+				<u-form-item label="详细地址" prop="addr" label-width="140">
 					<view style="width: 520rpx;">
 						<u-input v-model="form.addr" type="textarea" :border="true" height="200" :auto-height="true"
-							placeholder="宿舍号 / 教学楼等" placeholder-class="line" />
+							placeholder="宿舍号 / 教学楼等" />
 					</view>
 				</u-form-item>
 			</u-form>
