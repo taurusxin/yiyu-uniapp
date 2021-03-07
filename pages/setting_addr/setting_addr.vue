@@ -28,6 +28,7 @@
 </template>
 
 <script>
+	import $api from "../../api/api.js"
 	export default {
 		data() {
 			return {
@@ -41,9 +42,11 @@
 			getData() {
 				// 从后端拿取地址数据
 				// api写这里
-				
-				
-				
+
+				$api.getPersonAddr().then(res => {
+					this.siteList = res.data.siteList
+				}).catch(e => {})
+
 				this.siteList = [{
 						id: 0,
 						name: '游X',

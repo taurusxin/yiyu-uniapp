@@ -39,6 +39,7 @@
 </template>
 
 <script>
+	import $api from "../../api/api.js"
 	export default {
 		data() {
 			return {
@@ -48,7 +49,7 @@
 					name: '',
 					phone: '',
 					// area: ['浙江省', '宁波市', '鄞州区'],
-					area: [],
+					area: '',
 					addr: ''
 				},
 
@@ -73,7 +74,12 @@
 				uni.navigateBack()
 			},
 			save() {
+				// 保存时提交数据给后端
+				console.log("保存地址到后端，表单如下")
 				console.log(this.form)
+				$api.setPersonAddrByIndex(this.form).then(res => {
+					console.log(res)
+				}).catch(e => {})
 			},
 			// pickeraddr(item) {
 			//	// 地区选择器回调 
@@ -94,6 +100,13 @@
 		onLoad(e) {
 			console.log("接收到要更改第几个地址：" + e.add)
 			this.form.num = e.add
+			// 从后端获取数据
+			$api.getPersonAddrByIndex(e.add).then(res => {
+				console.log(res)
+				if (res.statusCode == 200) {
+					this.form = res.form
+				}
+			}).catch(e => {})
 		}
 	};
 </script>

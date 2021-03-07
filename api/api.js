@@ -4,6 +4,8 @@ import request from "./request.js"
 export default {
     // 根据时间戳范围获取课表
     // range 时间戳对象（包含开始和结束时间）
+	
+	// 获取首页轮播图
     getIndexSwiper(){
         return request("api/indexswiper", "GET", )
     },
@@ -13,6 +15,8 @@ export default {
         }
         return request("api/classtable", "GET", data)
     },
+	
+	// 课程提醒状态
     getReminder(status) {
         return request("api/reminder", "GET", )
     },
@@ -22,12 +26,16 @@ export default {
         }
         return request("api/reminder", "POST", data)
     },
+	
+	// 教务系统绑定状态
     getJwxtSetting(){
         return request("api/setting_jwxt", "GET", )
     },
     setJwxtSetting(data){
         return request("api/setting_jwxt", "POST", data)
     },
+	
+	// 用户个人信息
     getPersonSetting(){
         return request("api/setting_person", "GET", )
     },
@@ -35,4 +43,17 @@ export default {
         return request("api/setting_person", "POST", data)
     },
     
+	// 用户地址列表
+	getPersonAddr(){
+	    return request("api/setting_addr", "GET", )
+	},
+	getPersonAddrByIndex(index){
+		let data = {
+		    "index": index
+		}
+	    return request("api/setting_addr", "GET", data)
+	},
+	setPersonAddrByIndex(data){
+	    return request("api/setting_addr", "POST", data)
+	},
 }
