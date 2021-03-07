@@ -1,6 +1,9 @@
 <template>
     <view class="content">
-
+        <!-- 点击提示 -->
+        <u-modal v-model="toastwindow.show" :content="toastwindow.content" :async-close="true" @confirm="toastConfirm">
+        </u-modal>
+        <!-- 点击提示结束 -->
         <u-form :model="form" ref="uForm">
             <u-form-item label="选择学校 / 简称" prop="school" label-width="250">
                 <u-input v-model="form.school" type="select" @click="show = true" />
@@ -27,6 +30,11 @@
         data() {
             return {
                 binded: false,
+                toastwindow: {
+                    back: false,
+                    show: false,
+                    content: ""
+                },
                 form: {
                     school: '',
                     snumber: '',
@@ -67,6 +75,16 @@
             };
         },
         methods: {
+            toastConfirm(back) {
+                this.toastwindow.show = false
+                if (this.toastwindow.back) {
+                    uni.navigateBack()
+                }
+            },
+            showWindow(content) {
+                this.toastwindow.show = true,
+                    this.toastwindow.content = content
+            },
             submit() {
                 this.$refs.uForm.validate(valid => {
                     if (valid) {
@@ -74,10 +92,14 @@
                         console.log(this.form)
 
                         // 这里写异步请求
-                        $api.setJwxtSetting(this.form).then((res) => {
+                        $api.setJwxtSetting(this.form).then(res => {
                             if (res.statusCode == 200) {
-                                console.log("成功提交数据到服务端，正在返回")
-                                uni.navigateBack()
+                                console.log("成功提交数据到服务端")
+                                this.showWindow("恭喜！绑定成功了")
+                                this.toastwindow.back = true
+                            } else {
+                                this.toastwindow.back = false
+                                this.showWindow(res.data.errmsg)
                             }
                         }).catch((e) => {
                             console.log("提交数据到服务端失败")
@@ -104,7 +126,7 @@
         },
         onLoad() {
             // 页面启动的时候先向服务端拉去已有数据
-            $api.getJwxtSetting().then((res) => {
+            $api.getJwxtSetting().then(res => {
                 console.log(res)
                 if (res.statusCode == 200) {
                     this.form = res.data.form
