@@ -1,6 +1,9 @@
 <template>
     <view class="content">
-
+        <!-- 点击提示 -->
+        <u-modal v-model="toastwindow.show" :content="toastwindow.content" :async-close="true" @confirm="toastConfirm">
+        </u-modal>
+        <!-- 点击提示结束 -->
         <u-form :model="form" ref="uForm">
             <u-form-item label="姓名" prop="name">
                 <u-input v-model="form.name" />
@@ -28,6 +31,11 @@
         data() {
             return {
                 binded: false,
+                toastwindow: {
+                    back: false,
+                    show: false,
+                    content: ""
+                },
                 form: {
                     name: '',
                     sex: '',
@@ -68,6 +76,16 @@
             };
         },
         methods: {
+            toastConfirm(back) {
+                this.toastwindow.show = false
+                if (this.toastwindow.back) {
+                    uni.navigateBack()
+                }
+            },
+            showWindow(content) {
+                this.toastwindow.show = true,
+                    this.toastwindow.content = content
+            },
             submit() {
                 this.$refs.uForm.validate(valid => {
                     if (valid) {
@@ -78,9 +96,12 @@
                         $api.setPersonSetting(this.form).then((res) => {
                             if (res.statusCode == 200) {
                                 console.log("成功提交数据到服务端，正在返回")
-                                uni.navigateBack()
+                                this.showWindow("保存成功")
+                                this.toastwindow.back = true
                             } else {
                                 console.log("提交数据到服务端失败")
+                                this.showWindow("保存失败" + res.data.errmsg)
+                                this.toastwindow.back = false
                             }
                         }).catch((e) => {
                             console.log("提交数据到服务端失败")
