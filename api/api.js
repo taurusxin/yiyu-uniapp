@@ -56,4 +56,21 @@ export default {
 	setPersonAddrByIndex(data){
 	    return request("api/setting_addr", "POST", data)
 	},
+    
+    getOrderDfh(){
+        // 获取待发货数据
+        return request("api/orders_dfh", "GET", )
+    },
+    
+    getOrderDsh(){
+        // 获取待收货数据
+        return request("api/orders_dsh", "GET", )
+    },
+    setOrderDsh(id){
+        // 确认收获
+        let data = {
+            "id": id
+        }
+        return request("api/orders_dsh", "POST", data)
+    }
 }

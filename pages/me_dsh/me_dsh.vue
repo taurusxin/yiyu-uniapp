@@ -1,5 +1,9 @@
 <template>
     <view class="info_content">
+        <!-- 点击提示 -->
+        <u-modal v-model="toastwindow.show" :content="toastwindow.content" :async-close="true" @confirm="toastConfirm">
+        </u-modal>
+        <!-- 点击提示结束 -->
         <u-top-tips ref="uTips"></u-top-tips>
         <u-card v-for="item in info_data" :key="item.id" :title="'订单号：'+item.id"
             :sub-title="item.type == 'print' ? '代打印' : '取快递'"
@@ -13,26 +17,22 @@
                 <view v-if="item.descb.length != 0" class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
                     <view class="u-body-item-title u-line-2">{{item.descb}}</view>
                 </view>
-                <view>
+                <!--                <view>
                     <u-line-progress :striped="true" :percent="item.status * 100" :striped-active="true"
-                        :show-percent="false"></u-line-progress>
-                </view>
+                        :show-percent="true"></u-line-progress>
+                </view> -->
             </view>
             <view class="card_foot" slot="foot">
                 <view style="font-size:25rpx ;">
                     <u-icon name="clock-fill" size="34" color="" :label="item.time"></u-icon>
                 </view>
                 <view>
-                    <u-button v-if="item.status < 0.7" style="width: 200rpx; height: 50rpx;" shape="circle"
-                        type="primary" :plain="true" @click="goKeFu">找客服</u-button>
-                    <u-button v-if="item.status >= 0.7" style="width: 200rpx; height: 50rpx;" shape="circle" type="info"
-                        :plain="true" @click="showInfo">将派送</u-button>
+                    <u-button v-if="item.status > 0.7" style="width: 200rpx; height: 50rpx;" shape="circle"
+                        type="warning" :plain="true" @click="comfirmSign(item.id)">确认收货</u-button>
                 </view>
             </view>
         </u-card>
-
         <view style="height: 50px;"></view>
-
     </view>
 </template>
 
@@ -41,12 +41,17 @@
     export default {
         data() {
             return {
+                toastwindow: {
+                    back: false,
+                    show: false,
+                    content: ""
+                },
                 info_data: [{
                         "id": 1, //订单号
                         "type": "deliver", //订单类型
                         "desca": "快递号：SF12123789127",
                         "descb": "取件码：7777",
-                        "status": 0.3, 
+                        "status": 1, //待收货时状态为1
                         "time": "2020-05-15 19:00" //下单时间
                     },
                     {
@@ -54,17 +59,17 @@
                         "type": "print",
                         "desca": "文件名：期末复习题.docx",
                         "descb": "",
-                        "status": 0.7, //约定 >0.7 的状态前端就是将派送
+                        "status": 1, //约定 >0.7 的状态前端就是将派送
                         "time": "2020-05-15 12:00"
                     }
                 ],
             };
         },
         onShow() {
-            this.getOrderDfh()
+            this.getOrderDsh()
         },
         onPullDownRefresh() {
-            this.getOrderDfh()
+            this.getOrderDsh()
             this.$nextTick(function() {
                 setTimeout(function() {
                     // 不加这个方法真机下拉会一直处于刷新状态，无法复位
@@ -73,28 +78,36 @@
             })
         },
         methods: {
-            goKeFu(){
-               uni.navigateTo({
-                   url: '/pages/kefu/kefu',
-                   success: res => {},
-                   fail: () => {},
-                   complete: () => {}
-               }); 
+            toastConfirm() {
+                this.toastwindow.show = false
+                this.getOrderDsh()
             },
-            getOrderDfh() {
-                $api.getOrderDfh().then(res => {
+            showWindow(content) {
+                this.toastwindow.show = true,
+                    this.toastwindow.content = content
+            },
+            comfirmSign(id) {
+                // 确认收货按钮点击
+                // TODO
+                $api.setOrderDsh(id).then(res => {
+                    if (res.statusCode == 200) {
+                        this.showWindow("确认收货成功！")
+                    } else {
+                        console.log("确认失败，请稍后再试")
+                        this.showWindow(res.data.errmsg)
+                    }
+                }).catch(e => {
+                    console.log("网络错误")
+                    this.showWindow("确认失败，网络错误！")
+                })
+            },
+            getOrderDsh() {
+                $api.getOrderDsh().then(res => {
                     console.log(res)
-                    this.info_data = res.data.dfh
+                    this.info_data = res.data.Dsh
                     console.log(this.info_data)
                 })
             },
-            showInfo() {
-                this.$refs.uTips.show({
-                    title: '将派送不能催单哦',
-                    type: 'warning',
-                    duration: '2300'
-                })
-            }
         }
     }
 </script>

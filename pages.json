@@ -72,8 +72,8 @@
             "path" : "pages/me_dfh/me_dfh",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "待发货订单",
-                "enablePullDownRefresh": false
+                "navigationBarTitleText": "待送达订单",
+                "enablePullDownRefresh": true
             }
             
         }
@@ -81,8 +81,8 @@
             "path" : "pages/me_dsh/me_dsh",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "待收货订单",
-                "enablePullDownRefresh": false
+                "navigationBarTitleText": "待确认订单",
+                "enablePullDownRefresh": true
             }
             
         }

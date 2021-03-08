@@ -67,13 +67,13 @@
                 },
                 status: [{
                         key: 1,
-                        name: '待发货',
+                        name: '待送达',
                         url: '../../static/fumou-center-template/one.png',
                         addr: '/pages/me_dfh/me_dfh'
                     },
                     {
                         key: 2,
-                        name: '待收货',
+                        name: '待确认',
                         url: '../../static/fumou-center-template/2.png',
                         addr: '/pages/me_dsh/me_dsh'
                     },

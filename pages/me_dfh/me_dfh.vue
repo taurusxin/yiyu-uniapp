@@ -15,7 +15,7 @@
                 </view>
                 <view>
                     <u-line-progress :striped="true" :percent="item.status * 100" :striped-active="true"
-                        :show-percent="false"></u-line-progress>
+                        :show-percent="true"></u-line-progress>
                 </view>
             </view>
             <view class="card_foot" slot="foot">
@@ -30,9 +30,7 @@
                 </view>
             </view>
         </u-card>
-
         <view style="height: 50px;"></view>
-
     </view>
 </template>
 
