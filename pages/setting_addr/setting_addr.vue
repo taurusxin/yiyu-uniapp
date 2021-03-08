@@ -36,8 +36,11 @@
 			};
 		},
 		onLoad() {
-			this.getData();
+			// this.getData();
 		},
+        onShow() {
+            this.getData();
+        },
 		methods: {
 			getData() {
 				// 从后端拿取地址数据
