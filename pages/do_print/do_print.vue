@@ -4,14 +4,14 @@
         <view class="plus" @click="choseFile">
             <u-icon name="plus-circle-fill" style="margin-right: 20rpx;">
             </u-icon>
-            <view style="font-size: 40rpx;">点击来选择文件</view>
+            <view style="font-size: 36rpx;">点击来选择文件</view>
         </view>
-        <view style="color: #555555;">
-            {{file_name}}
+        <view class="info" style="color: #555555;width: 330rpx;">
+            <view style="text-align: center;"><text>{{file_name}}</text></view>
             <u-line-progress v-if="upprogress > 0" active-color="#899099" :percent="upprogress"></u-line-progress>
             <!-- {{file_path}} -->
         </view>
-         <view style="height: 300rpx;width: 330rpx;">
+        <view style="height: 300rpx;width: 330rpx;">
             <u-button type="primary" plain @click="upload">上传</u-button>
         </view>
     </view>
@@ -71,6 +71,15 @@
                             console.log("上传成功")
                             console.log(data)
                             _this.showTopToast("上传成功", "success")
+                            //TODO 这里应该要让后端返回一个文件ID
+                            // 然后拿着文件ID再到表单填写页面去
+                            let fid = 123
+                            uni.navigateTo({
+                                url: '/pages/do_print_info/do_print_info?fid=' + fid,
+                                success: res => {},
+                                fail: () => {},
+                                complete: () => {}
+                            });
                         } else {
                             console.log('上传失败，状态码：' + res.statusCode)
                             _this.showTopToast("上传失败 " + res.data.errmsg, "warning")
@@ -109,6 +118,15 @@
             flex-direction: column;
             justify-content: start;
             align-items: center;
+
+            .info {
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: center;
+                color: #555555;
+                width: 330rpx;
+            }
         }
     }
 </style>

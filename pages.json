@@ -149,6 +149,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/do_print_info/do_print_info",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "打印信息",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
