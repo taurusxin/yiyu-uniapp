@@ -116,8 +116,13 @@
                 if (e) {
                     // 此处需要API，成功后显示window
                     $api.setReminder(true).then((res) => {
-                        // 最好判断200
-                        this.showWindow("课表提醒已开启")
+                        if(res.statusCode == 200){
+                            this.showWindow("课表提醒已开启")
+                            this.getReminder()
+                        }else{
+                            this.showWindow("开启失败，请重试")
+                            this.getReminder()
+                        }
                     }).catch((err) => {
                         console.log(err)
                         this.showWindow("开启失败（网络错误）")
@@ -125,14 +130,19 @@
                 } else {
                     // 此处需要API，成功后显示window
                     $api.setReminder(false).then((res) => {
-                        // 最好判断200
-                        this.showWindow("课表提醒已关闭")
+                        if(res.statusCode == 200){
+                            this.showWindow("课表提醒已关闭")
+                            this.getReminder()
+                        }else{
+                            this.showWindow("关闭失败，请重试")
+                            this.getReminder()
+                        }
                     }).catch((err) => {
                         console.log(err)
                         this.showWindow("关闭失败（网络错误）")
                     })
                 }
-                this.getReminder()
+                
             }
         },
         computed: {
