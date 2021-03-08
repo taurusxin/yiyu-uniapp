@@ -104,7 +104,7 @@
             getOrderDsh() {
                 $api.getOrderDsh().then(res => {
                     console.log(res)
-                    this.info_data = res.data.Dsh
+                    this.info_data = res.data.dsh
                     console.log(this.info_data)
                 })
             },
