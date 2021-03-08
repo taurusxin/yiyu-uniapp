@@ -79,6 +79,6 @@ export default {
         let data = {
             "page": page
         }
-        return request("api/orders_dsh", "GET", data)
+        return request("api/orders_all", "GET", data)
     },
 }
