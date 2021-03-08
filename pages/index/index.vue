@@ -31,7 +31,7 @@
                 <view class="grid-text">帮助</view>
             </u-grid-item>
         </u-grid>
-        <view style="margin-top: 300rpx;">
+        <view style="margin : 200rpx 0 80rpx 0;">
             <u-divider>溢予，你的大学生活我承包了！</u-divider>
         </view>
         
