@@ -7,10 +7,10 @@
             :thumb-circle="true" :head-border-bottom="false" margin="0rpx 0rpx 20rpx 0rpx"
             box-shadow="1px 1px 3px #e1e1e1">
             <view class="" slot="body">
-                <view class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
+                <view class="u-body-item u-flex u-col-between u-p-t-0">
                     <view class="u-body-item-title u-line-2">{{item.desca}}</view>
                 </view>
-                <view v-if="item.descb.length != 0" class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
+                <view v-if="item.descb.length != 0" class="u-body-item u-flex u-col-between u-p-t-0">
                     <view class="u-body-item-title u-line-2">{{item.descb}}</view>
                 </view>
                 <view>
