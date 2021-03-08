@@ -29,8 +29,10 @@
                 </view>
             </view>
         </u-card>
-        <view style="height: 50px;"></view>
-        <u-loadmore :status="status" />
+
+        <view style="margin: 50px 0 50px 0;">
+            <u-loadmore :status="status" />
+        </view>
     </view>
 </template>
 
@@ -39,8 +41,8 @@
     export default {
         data() {
             return {
-                page: 1,
-                status: 'loadmore',
+                page: 1, //这是前端存放当前请求到第几页的flag
+                status: 'nomore',
                 info_data: [{
                         "id": 1, //订单号
                         "type": "deliver", //订单类型
@@ -51,6 +53,21 @@
                     },
                     {
                         "id": 2,
+                        "type": "print",
+                        "desca": "文件名：期末复习题.docx",
+                        "descb": "",
+                        "status": 2, //约定 >0.7 的状态前端就是将派送
+                        "time": "2020-05-15 12:00"
+                    }, {
+                        "id": 3, //订单号
+                        "type": "deliver", //订单类型
+                        "desca": "快递号：SF12123789127",
+                        "descb": "取件码：7777",
+                        "status": 0.3,
+                        "time": "2020-05-15 19:00" //下单时间
+                    },
+                    {
+                        "id": 4,
                         "type": "print",
                         "desca": "文件名：期末复习题.docx",
                         "descb": "",
@@ -75,38 +92,39 @@
         onReachBottom() {
             // 下拉刷新代码放这里
             // TODO
-            if (this.page >= 3) return;
-            this.status = 'loading';
-            this.page = ++this.page;
             setTimeout(() => {
-                this.list += 10;
-                if (this.page >= 3) this.status = 'nomore';
-                else this.status = 'loading';
+                if (this.status == 'loadmore') {
+                    this.page += 1
+                    // 载入新页面
+                    this.getOrderAll(this.page)
+                }
             }, 2000)
         },
         methods: {
-
             getOrderAll(page) {
                 $api.getOrderAll(page).then(res => {
                     if (res.statusCode == 200) {
-                        this.info_data = res.data.all
+                        console.log("请求全部订单成功，返回如下：")
                         console.log(this.info_data)
-
-                        if (res.data.page == 1) {
-                            this.status = 'nomore'
+                        if (page == 1) {
+                            // 下拉刷新或首次载入时清空 this.info_data
+                            this.info_data = res.data.all
+                        } else {
+                            // 拼接对象
+                            // TODO 这里可能有写错的
+                            this.info_data = Object.assign(this.info_data, res.data.all)
+                            // res.data.page 需要服务端返回还剩几页
+                            if (res.data.page == 0) {
+                                this.status = 'nomore'
+                            } else {
+                                this.status = 'loadmore'
+                            }
                         }
-
-
                     } else {
-                        console.log(res.errmsg)
+                        console.log("获取全部订单出错：" + res.errmsg)
                     }
-                })
-            },
-            showInfo() {
-                this.$refs.uTips.show({
-                    title: '将派送不能催单哦',
-                    type: 'warning',
-                    duration: '2300'
+                }).catch(e => {
+                    console.log(e)
                 })
             }
         }

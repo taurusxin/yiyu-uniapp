@@ -74,7 +74,7 @@ export default {
         return request("api/orders_dsh", "POST", data)
     },
 
-    getOrderDsh(page) {
+    getOrderAll(page) {
         // 按页面获取全部订单
         let data = {
             "page": page

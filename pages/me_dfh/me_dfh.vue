@@ -44,7 +44,7 @@
                         "type": "deliver", //订单类型
                         "desca": "快递号：SF12123789127",
                         "descb": "取件码：7777",
-                        "status": 0.3, 
+                        "status": 0.3,
                         "time": "2020-05-15 19:00" //下单时间
                     },
                     {
@@ -71,19 +71,23 @@
             })
         },
         methods: {
-            goKeFu(){
-               uni.navigateTo({
-                   url: '/pages/kefu/kefu',
-                   success: res => {},
-                   fail: () => {},
-                   complete: () => {}
-               }); 
+            goKeFu() {
+                uni.navigateTo({
+                    url: '/pages/kefu/kefu',
+                    success: res => {},
+                    fail: () => {},
+                    complete: () => {}
+                });
             },
             getOrderDfh() {
                 $api.getOrderDfh().then(res => {
-                    console.log(res)
-                    this.info_data = res.data.dfh
-                    console.log(this.info_data)
+                    if (res.statusCode == 200) {
+                        console.log("请求待送达成功，返回如下：")
+                        console.log(res.data)
+                        this.info_data = res.data.dfh
+                    }else{
+                        console.log("请求错误" + res.data.errmsg)
+                    }
                 })
             },
             showInfo() {

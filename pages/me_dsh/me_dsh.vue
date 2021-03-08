@@ -103,9 +103,13 @@
             },
             getOrderDsh() {
                 $api.getOrderDsh().then(res => {
-                    console.log(res)
-                    this.info_data = res.data.dsh
-                    console.log(this.info_data)
+                    if (res.statusCode == 200) {
+                        console.log("请求待确认成功，返回如下：")
+                        console.log(res.data)
+                        this.info_data = res.data.dsh
+                    } else {
+                        console.log("请求错误" + res.data.errmsg)
+                    }
                 })
             },
         }
