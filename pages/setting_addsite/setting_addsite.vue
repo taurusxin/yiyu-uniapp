@@ -134,7 +134,7 @@
 			$api.getPersonAddrByIndex(e.add).then(res => {
 				console.log(res)
 				if (res.statusCode == 200) {
-					this.form = res.form
+					this.form = res.data.form
 				}
 			}).catch(e => {})
 		},
