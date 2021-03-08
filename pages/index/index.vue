@@ -10,10 +10,10 @@
                 <image style="width: 100rpx; height: 100rpx;" src="../../static/indexapp/i_print.png"></image>
                 <view class="grid-text">代打印</view>
             </u-grid-item>
-            <u-grid-item @click="goPage('/pages/do_goods/do_goods')">
+<!--            <u-grid-item @click="goPage('/pages/do_goods/do_goods')">
                 <image style="width: 100rpx; height: 100rpx;" src="../../static/indexapp/i_goods.png"></image>
                 <view class="grid-text">取外卖</view>
-            </u-grid-item>
+            </u-grid-item> -->
             <u-grid-item @click="goPage('/pages/do_deliver/do_deliver')">
                 <image style="width: 100rpx; height: 100rpx;" src="../../static/indexapp/i_deliver.png"></image>
                 <view class="grid-text">取快递</view>

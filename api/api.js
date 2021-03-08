@@ -81,4 +81,15 @@ export default {
         }
         return request("api/orders_all", "GET", data)
     },
+
+    setPrintOrder(data) {
+        // 提交打印订单
+        return request("api/do_print", "POST", data)
+    },
+    
+    setDeliverOrder(data) {
+        // 提交取快递订单
+        return request("api/do_deliver", "POST", data)
+    }
+
 }

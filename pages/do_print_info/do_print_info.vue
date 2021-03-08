@@ -47,7 +47,6 @@
     export default {
         data() {
             return {
-                binded: false,
                 toastwindow: {
                     back: false,
                     show: false,
@@ -104,7 +103,7 @@
                         console.log(this.form)
 
                         // 这里写异步请求
-                        $api.setJwxtSetting(this.form).then(res => {
+                        $api.setPrintOrder(this.form).then(res => {
                             if (res.statusCode == 200) {
                                 console.log("成功提交数据到服务端")
                                 this.showWindow("打印提交成功！")
@@ -142,7 +141,7 @@
                 } else {
                     console.log("状态码不为200，地址获取失败")
 
-
+                    // TODO remove when api finished
                     this.addrSheetList = [{
                             text: '广东省深圳市宝安区 自由路66号'
                         },
@@ -153,8 +152,8 @@
                             text: '广东省深圳市宝安区 平安路13号'
                         }
                     ]
-
-
+                    // TODO remove when api finished
+                    
                 }
             }).catch((err) => {
                 console.log(err)
