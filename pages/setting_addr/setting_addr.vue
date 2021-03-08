@@ -51,27 +51,6 @@
 						this.siteList = res.data.siteList
 					}
 				}).catch(e => {})
-
-				this.siteList = [{
-						id: 0,
-						name: '游X',
-						phone: '183****5523',
-						site: '广东省深圳市宝安区 自由路66号'
-					},
-					{
-						id: 1,
-						name: '李XX',
-						phone: '183****5555',
-						site: '广东省深圳市宝安区 翻身路xx号'
-					}
-					// ,
-					// {
-					// 	id: 2,
-					// 	name: '王YY',
-					// 	phone: '153****5555',
-					// 	site: '广东省深圳市宝安区 平安路13号'
-					// }
-				];
 			},
 			// 地址编号为 0，1，2
 			toAddSite() {
