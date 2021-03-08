@@ -75,7 +75,7 @@
                             // 然后拿着文件ID再到表单填写页面去
                             let fid = 123
                             uni.navigateTo({
-                                url: '/pages/do_print_info/do_print_info?fid=' + fid,
+                                url: '/pages/do_print_info/do_print_info?fid=' + fid + '&fname=' + _this.file_name,
                                 success: res => {},
                                 fail: () => {},
                                 complete: () => {}
@@ -83,6 +83,18 @@
                         } else {
                             console.log('上传失败，状态码：' + res.statusCode)
                             _this.showTopToast("上传失败 " + res.data.errmsg, "warning")
+                            
+                            
+                            //TODO 测试用完后移除
+                            let fid = 123
+                            uni.navigateTo({
+                                url: '/pages/do_print_info/do_print_info?fid=' + fid + '&fname=' + _this.file_name,
+                                success: res => {},
+                                fail: () => {},
+                                complete: () => {}
+                            });
+                            //TODO end
+                            
                         }
                     },
                     fail(res) {

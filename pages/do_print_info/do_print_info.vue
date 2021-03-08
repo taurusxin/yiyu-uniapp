@@ -5,20 +5,38 @@
         </u-modal>
         <!-- 点击提示结束 -->
         <u-form :model="form" ref="uForm">
-            <u-form-item label="选择学校 / 简称" prop="school" label-width="250">
-                <u-input v-model="form.school" type="select" @click="show = true" />
-                <u-action-sheet :list="schoolSheetList" v-model="show" @click="schoolSheetCallback"></u-action-sheet>
+            <u-form-item label="文件名" label-width="150">
+                <u-input v-model="form.fname" disabled placeholder="上传后显示文件名" />
             </u-form-item>
-            <u-form-item label="输入学号" prop="snumber" label-width="150">
-                <u-input v-model="form.snumber" />
+
+            <u-form-item label="打印份数" label-width="150">
+                <u-slider v-model="form.number" min="1" max="100"></u-slider>
             </u-form-item>
-            <u-form-item label="教务网密码" prop="spass" label-width="150">
-                <u-input v-model="form.spass" type="password" />
+            <u-form-item>
+                <view style="text-align: end;">
+                    <text>共 {{form.number}} 份</text>
+                </view>
             </u-form-item>
+            <u-form-item label="选择地址" prop="address" label-width="150">
+                <u-input v-model="form.address" type="select" @click="show = true" placeholder="若无地址,点击下方添加" />
+                <u-action-sheet :list="addrSheetList" v-model="show" @click="addrSheetCallback"></u-action-sheet>
+            </u-form-item>
+
+            <u-form-item>
+                <view style="display: flex;justify-content: start;flex-direction: row-reverse;">
+                    <view style="width: 200rpx;">
+                        <u-button type="info" @click="setAddr">设置地址</u-button>
+                    </view>
+                </view>
+            </u-form-item>
+
+            <u-form-item label="备注(可选)" label-width="150">
+                <u-input v-model="form.note" placeholder="填写备注信息" />
+            </u-form-item>
+
         </u-form>
         <view style="margin-top: 90rpx;">
-            <u-button v-if="binded" @click="submit" type="primary" plain>重新绑定</u-button>
-            <u-button v-else @click="submit" type="primary" plain>提交绑定</u-button>
+            <u-button @click="submit" type="primary" plain>提交打印</u-button>
         </view>
 
     </view>
@@ -36,54 +54,48 @@
                     content: ""
                 },
                 form: {
-                    school: '',
-                    snumber: '',
-                    spass: '',
+                    fid: '',
+                    fname: '',
+                    address: '',
+                    addrindex: 0,
+                    number: '',
+                    note: '',
                 },
                 rules: {
-                    school: [{
+                    address: [{
                         required: true,
-                        message: '请选择学校',
+                        message: '请选择地址',
                         // 可以单个或者同时写两个触发验证方式 
                         trigger: ['change', 'blur'],
                     }],
-                    snumber: [{
-                        required: true,
-                        type: 'number',
-                        message: '请正确输入学号',
-                        // 可以单个或者同时写两个触发验证方式 
-                        trigger: ['change', 'blur'],
-                    }],
-                    spass: [{
-                        min: 5,
-                        required: true,
-                        message: '请输入5位以上密码',
-                        trigger: ['change', 'blur'],
-                    }]
                 },
                 show: false,
-                schoolSheetList: [{
-                        text: '华南农业大学珠江学院'
-                    },
-                    {
-                        text: '北京大学'
-                    },
-                    {
-                        text: '清华大学'
-                    }
-                ],
+                addrSheetList: []
             };
         },
         methods: {
             toastConfirm(back) {
                 this.toastwindow.show = false
                 if (this.toastwindow.back) {
-                    uni.navigateBack()
+                    uni.switchTab({
+                        url: "/pages/index/index",
+                        success: res => {},
+                        fail: () => {},
+                        complete: () => {}
+                    })
                 }
             },
             showWindow(content) {
                 this.toastwindow.show = true,
                     this.toastwindow.content = content
+            },
+            setAddr() {
+                uni.navigateTo({
+                    url: '/pages/setting_addr/setting_addr',
+                    success: res => {},
+                    fail: () => {},
+                    complete: () => {}
+                });
             },
             submit() {
                 this.$refs.uForm.validate(valid => {
@@ -95,14 +107,14 @@
                         $api.setJwxtSetting(this.form).then(res => {
                             if (res.statusCode == 200) {
                                 console.log("成功提交数据到服务端")
-                                this.showWindow("恭喜！绑定成功了")
+                                this.showWindow("打印提交成功！")
                                 this.toastwindow.back = true
                             } else {
                                 this.toastwindow.back = false
                                 this.showWindow(res.data.errmsg)
                             }
                         }).catch((e) => {
-                            console.log("提交数据到服务端失败")
+                            console.log("提交打印失败")
                             console.log(e)
                         })
                     } else {
@@ -110,34 +122,49 @@
                     }
                 });
             },
-            schoolSheetCallback(index) {
-                // this.form.school = this.schoolSheetList[index].text;
-                if (index == 0) {
-                    this.form.school = "scauzj"
-                } else {
-                    this.form.school = "others"
-                }
-                console.log("已选择的学校为：" + this.form.school)
+            addrSheetCallback(index) {
+                this.form.address = this.addrSheetList[index].text;
+                this.form.addrindex = index;
+                console.log("已选择第" + index + "个地址：" + this.form.address)
             }
         },
         // 必须要在onReady生命周期，因为onLoad生命周期组件可能尚未创建完毕
         onReady() {
             this.$refs.uForm.setRules(this.rules);
         },
-        onLoad() {
+        onShow() {
+            // TODO 获取地址列表
             // 页面启动的时候先向服务端拉去已有数据
-            $api.getJwxtSetting().then(res => {
+            $api.getPersonAddr().then(res => {
                 console.log(res)
                 if (res.statusCode == 200) {
-                    this.form = res.data.form
-                    // 说明用户之前绑定过教务系统
-                    this.binded = true
+                    this.addrSheetList = res.data.siteList
                 } else {
-                    console.log("状态码不为200，用户之前还没绑定")
+                    console.log("状态码不为200，地址获取失败")
+
+
+                    this.addrSheetList = [{
+                            text: '广东省深圳市宝安区 自由路66号'
+                        },
+                        {
+                            text: '广东省深圳市宝安区 翻身路xx号'
+                        },
+                        {
+                            text: '广东省深圳市宝安区 平安路13号'
+                        }
+                    ]
+
+
                 }
             }).catch((err) => {
                 console.log(err)
             })
+        },
+        onLoad(e) {
+            // 获取上级页面传来的 fid fname
+            this.form.fid = e.fid
+            this.form.fname = e.fname
+            console.log(this.form)
         }
     };
 </script>
