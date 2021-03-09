@@ -11,6 +11,11 @@
             <u-form-item label="取件码" prop="qvjianma" label-width="150">
                 <u-input v-model="form.qvjianma" placeholder="请输入取件码" />
             </u-form-item>
+
+            <u-form-item label="驿站信息" prop="yizhan" label-width="150">
+                <u-input v-model="form.yizhan" placeholder="填写快递代收点详细信息" />
+            </u-form-item>
+
             <u-form-item label="选择地址" prop="address" label-width="150">
                 <u-input v-model="form.address" type="select" @click="show = true" placeholder="若无地址,点击下方添加" />
                 <u-action-sheet :list="addrSheetList" v-model="show" @click="addrSheetCallback"></u-action-sheet>
@@ -28,6 +33,10 @@
                 <u-input v-model="form.note" placeholder="填写备注信息" />
             </u-form-item>
 
+            <u-form-item label="服务价格" label-width="150">
+                <text>本次取快递需要 {{price}} 元</text>
+            </u-form-item>
+
         </u-form>
         <view style="margin-top: 90rpx;">
             <u-button @click="submit" type="primary" plain>提交取件信息</u-button>
@@ -41,6 +50,7 @@
     export default {
         data() {
             return {
+                price: 2,
                 toastwindow: {
                     back: false,
                     show: false,
@@ -49,6 +59,7 @@
                 form: {
                     danhao: '',
                     qvjianma: '',
+                    yizhan: '',
                     address: '',
                     addrindex: 0,
                     note: '',
@@ -58,6 +69,13 @@
                         min: 5,
                         required: true,
                         message: '请输入正确的快递单号',
+                        // 可以单个或者同时写两个触发验证方式 
+                        trigger: ['change', 'blur'],
+                    }],
+                    yizhan: [{
+                        min: 3,
+                        required: true,
+                        message: '请输入驿站信息',
                         // 可以单个或者同时写两个触发验证方式 
                         trigger: ['change', 'blur'],
                     }],
@@ -144,7 +162,13 @@
             $api.getPersonAddr().then(res => {
                 console.log(res)
                 if (res.statusCode == 200) {
-                    this.addrSheetList = res.data.siteList
+                    // this.addrSheetList = res.data.siteList
+                    for (let i = 0; i < res.data.siteList.length; i++) {
+                        this.addrSheetList[i] = {
+                            text : res.data.siteList[i].name + " - " + res.data.siteList[i].site
+                        }
+                    }
+                    // console.log(this.addrSheetList)
                 } else {
                     console.log("状态码不为200，地址获取失败")
 
@@ -160,14 +184,25 @@
                         }
                     ]
                     // TODO remove when api finished
-                    
+
                 }
             }).catch((err) => {
                 console.log(err)
             })
+
+            $api.getMoney('qkd').then(res => {
+                if (res.statusCode == 200) {
+                    this.price = res.data.money
+                } else {
+                    console.log("快递价格获取失败" + res.data.errmsg)
+                }
+            }).catch((err) => {
+                console.log(err)
+            })
+
+
         },
-        onLoad(e) {
-        }
+        onLoad(e) {}
     };
 </script>
 

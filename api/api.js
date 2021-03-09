@@ -90,6 +90,14 @@ export default {
     setDeliverOrder(data) {
         // 提交取快递订单
         return request("api/do_deliver", "POST", data)
-    }
+    },
+    
+    getMoney(type) {
+        // 金钱接口（查询余额，显示价格）
+        let data = {
+            "type": type
+        }
+        return request("api/do_money", "GET", data)
+    },
 
 }

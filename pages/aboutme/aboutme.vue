@@ -33,12 +33,17 @@
                 <view class="funcation_list">
                     <view>
                         <u-cell-group>
+                            <u-cell-item icon="rmb-circle" title="溢予钱包" :arrow="false" :value="money + ' 元'">
+                            </u-cell-item>
                             <u-cell-item icon="bell" title="课表提醒" :arrow="false">
                                 <u-switch slot="right-icon" v-model="setting_remind" @change="switchRemind"></u-switch>
                             </u-cell-item>
-                            <u-cell-item icon="edit-pen" title="教务绑定" :arrow="true" @click="goPage('/pages/setting_jiaowu/setting_jiaowu')"></u-cell-item>
-                            <u-cell-item icon="account" title="个人信息" :arrow="true" @click="goPage('/pages/setting_person/setting_person')"></u-cell-item>
-                            <u-cell-item icon="map" title="地址管理" :arrow="true" @click="goPage('/pages/setting_addr/setting_addr')"></u-cell-item>
+                            <u-cell-item icon="edit-pen" title="教务绑定" :arrow="true"
+                                @click="goPage('/pages/setting_jiaowu/setting_jiaowu')"></u-cell-item>
+                            <u-cell-item icon="account" title="个人信息" :arrow="true"
+                                @click="goPage('/pages/setting_person/setting_person')"></u-cell-item>
+                            <u-cell-item icon="map" title="地址管理" :arrow="true"
+                                @click="goPage('/pages/setting_addr/setting_addr')"></u-cell-item>
                         </u-cell-group>
                     </view>
                     <view style="margin-top: 20rpx;">
@@ -65,6 +70,7 @@
                     show: false,
                     content: ""
                 },
+                money: 'loading',
                 status: [{
                         key: 1,
                         name: '待送达',
@@ -93,6 +99,11 @@
             };
         },
         methods: {
+            getMoney(type) {
+                $api.getMoney(type).then(res => {
+                    this.money = res.data.money
+                })
+            },
             getReminder() {
                 $api.getReminder().then(res => {
                     this.setting_remind = res.data.setting_remind
@@ -116,10 +127,10 @@
                 if (e) {
                     // 此处需要API，成功后显示window
                     $api.setReminder(true).then((res) => {
-                        if(res.statusCode == 200){
+                        if (res.statusCode == 200) {
                             this.showWindow("课表提醒已开启")
                             this.getReminder()
-                        }else{
+                        } else {
                             this.showWindow("开启失败，请重试")
                             this.getReminder()
                         }
@@ -130,10 +141,10 @@
                 } else {
                     // 此处需要API，成功后显示window
                     $api.setReminder(false).then((res) => {
-                        if(res.statusCode == 200){
+                        if (res.statusCode == 200) {
                             this.showWindow("课表提醒已关闭")
                             this.getReminder()
-                        }else{
+                        } else {
                             this.showWindow("关闭失败，请重试")
                             this.getReminder()
                         }
@@ -142,7 +153,7 @@
                         this.showWindow("关闭失败（网络错误）")
                     })
                 }
-                
+
             }
         },
         computed: {
@@ -162,6 +173,7 @@
             }
         },
         onLoad() {
+            this.getMoney("user")
             this.getReminder()
         }
     }

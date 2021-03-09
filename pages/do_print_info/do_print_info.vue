@@ -34,6 +34,10 @@
                 <u-input v-model="form.note" placeholder="填写备注信息" />
             </u-form-item>
 
+            <u-form-item label="服务价格" label-width="150">
+                <text>当前打印单价 {{price}} 元，共 {{form.number*price}} 元</text>
+            </u-form-item>
+
         </u-form>
         <view style="margin-top: 90rpx;">
             <u-button @click="submit" type="primary" plain>提交打印</u-button>
@@ -47,6 +51,7 @@
     export default {
         data() {
             return {
+                price: 1.5,
                 toastwindow: {
                     back: false,
                     show: false,
@@ -137,7 +142,11 @@
             $api.getPersonAddr().then(res => {
                 console.log(res)
                 if (res.statusCode == 200) {
-                    this.addrSheetList = res.data.siteList
+                    for (let i = 0; i < res.data.siteList.length; i++) {
+                        this.addrSheetList[i] = {
+                            text: res.data.siteList[i].name + " - " + res.data.siteList[i].site
+                        }
+                    }
                 } else {
                     console.log("状态码不为200，地址获取失败")
 
@@ -153,7 +162,17 @@
                         }
                     ]
                     // TODO remove when api finished
-                    
+
+                }
+            }).catch((err) => {
+                console.log(err)
+            })
+
+            $api.getMoney('ddy').then(res => {
+                if (res.statusCode == 200) {
+                    this.price = res.data.money
+                } else {
+                    console.log("打印价格获取失败" + res.data.errmsg)
                 }
             }).catch((err) => {
                 console.log(err)
