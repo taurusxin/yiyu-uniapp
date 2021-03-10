@@ -6,9 +6,11 @@
             </u-icon>
             <view style="font-size: 36rpx;">点击来选择文件</view>
         </view>
-        <view class="info" style="color: #555555;width: 330rpx;">
+        <view class="info" style="color: #555555;width: 100%;">
             <view style="text-align: center;"><text>{{file_name}}</text></view>
-            <u-line-progress v-if="upprogress > 0" active-color="#899099" :percent="upprogress"></u-line-progress>
+            <view style="width: 330rpx;height: 90rpx; margin-top: 40rpx;">
+                <u-line-progress v-if="upprogress > 0" active-color="#899099" :percent="upprogress"></u-line-progress>
+            </view>
             <!-- {{file_path}} -->
         </view>
         <view style="height: 300rpx;width: 330rpx;">
@@ -75,7 +77,8 @@
                             // 然后拿着文件ID再到表单填写页面去
                             let fid = 123
                             uni.navigateTo({
-                                url: '/pages/do_print_info/do_print_info?fid=' + fid + '&fname=' + _this.file_name,
+                                url: '/pages/do_print_info/do_print_info?fid=' + fid + '&fname=' + _this
+                                    .file_name,
                                 success: res => {},
                                 fail: () => {},
                                 complete: () => {}
@@ -83,18 +86,19 @@
                         } else {
                             console.log('上传失败，状态码：' + res.statusCode)
                             _this.showTopToast("上传失败 " + res.data.errmsg, "warning")
-                            
-                            
+
+
                             //TODO 测试用完后移除
                             let fid = 123
                             uni.navigateTo({
-                                url: '/pages/do_print_info/do_print_info?fid=' + fid + '&fname=' + _this.file_name,
+                                url: '/pages/do_print_info/do_print_info?fid=' + fid + '&fname=' + _this
+                                    .file_name,
                                 success: res => {},
                                 fail: () => {},
                                 complete: () => {}
                             });
                             //TODO end
-                            
+
                         }
                     },
                     fail(res) {
@@ -130,15 +134,15 @@
             flex-direction: column;
             justify-content: start;
             align-items: center;
-
-            .info {
-                display: flex;
-                flex-direction: column;
-                justify-content: start;
-                align-items: center;
-                color: #555555;
-                width: 330rpx;
-            }
+        }
+        
+        .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            color: #555555;
+            width: 330rpx;
         }
     }
 </style>
