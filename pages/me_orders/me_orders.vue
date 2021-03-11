@@ -106,19 +106,21 @@
                     if (res.statusCode == 200) {
                         console.log("请求全部订单成功，返回如下：")
                         console.log(this.info_data)
+                        if (res.data.page == 0) {
+                            this.status = 'nomore'
+                        } else {
+                            this.status = 'loadmore'
+                        }
                         if (page == 1) {
                             // 下拉刷新或首次载入时清空 this.info_data
                             this.info_data = res.data.all
+
                         } else {
                             // 拼接对象
-                            // TODO 这里可能有写错的
-                            this.info_data = Object.assign(this.info_data, res.data.all)
-                            // res.data.page 需要服务端返回还剩几页
-                            if (res.data.page == 0) {
-                                this.status = 'nomore'
-                            } else {
-                                this.status = 'loadmore'
+                            for(var i = 0; i < res.data.all.length; i++) {
+                               this.info_data.push(res.data.all[j])
                             }
+                            // res.data.page 需要服务端返回还剩几页
                         }
                     } else {
                         console.log("获取全部订单出错：" + res.errmsg)
