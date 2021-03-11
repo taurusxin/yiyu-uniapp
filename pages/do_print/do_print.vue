@@ -104,6 +104,19 @@
                     fail(res) {
                         console.log('上传失败')
                         _this.showTopToast("上传失败，网络异常", "warning")
+                        
+                        //TODO 测试用完后移除
+                        let fid = 123
+                        uni.navigateTo({
+                            url: '/pages/do_print_info/do_print_info?fid=' + fid + '&fname=' + _this
+                                .file_name,
+                            success: res => {},
+                            fail: () => {},
+                            complete: () => {}
+                        });
+                        //TODO end
+                        
+                        
                     }
                 })
 

@@ -171,9 +171,9 @@
                 this.avatarurl = userinfo.avatarUrl
                 console.log(this.avatarurl)
             }
+            this.getMoney("user")
         },
         onLoad() {
-            this.getMoney("user")
             this.getReminder()
         }
     }

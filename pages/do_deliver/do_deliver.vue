@@ -16,7 +16,7 @@
                 <u-input v-model="form.yizhan" placeholder="填写快递代收点详细信息" />
             </u-form-item>
 
-            <u-form-item label="选择地址" prop="address" label-width="150">
+            <u-form-item label="选择地址" prop="address" label-width="150" :border-bottom="false">
                 <u-input v-model="form.address" type="select" @click="show = true" placeholder="若无地址,点击下方添加" />
                 <u-action-sheet :list="addrSheetList" v-model="show" @click="addrSheetCallback"></u-action-sheet>
             </u-form-item>

@@ -8,14 +8,25 @@
             <u-form-item label="姓名" prop="name">
                 <u-input v-model="form.name" />
             </u-form-item>
+            
             <u-form-item label="性别" prop="sex">
                 <u-input v-model="form.sex" type="select" @click="show = true" />
                 <u-action-sheet :list="sexSheetList" v-model="show" @click="sexSheetCallback"></u-action-sheet>
             </u-form-item>
+
             <!-- 后期有条件改成获取手机号 -->
-            <u-form-item label="输入手机号" prop="phone" label-width="150">
-                <u-input v-model="form.phone" />
+            <u-form-item label="手机号" prop="phone" label-width="100" :border-bottom="false">
+                <u-input v-model="form.phone" disabled placeholder="点击下方按钮获取手机号" />
             </u-form-item>
+
+            <u-form-item>
+                <view style="display: flex;justify-content: start;flex-direction: row-reverse;">
+                    <view style="width: 200rpx;">
+                        <getphone @getPhone="getPhone"></getphone>
+                    </view>
+                </view>
+            </u-form-item>
+
         </u-form>
         <view style="margin-top: 90rpx;">
             <u-button v-if="binded" @click="submit" type="primary" plain>修改信息</u-button>
@@ -76,6 +87,9 @@
             };
         },
         methods: {
+            getPhone(data) {
+                this.form.phone = data
+            },
             toastConfirm(back) {
                 this.toastwindow.show = false
                 if (this.toastwindow.back) {

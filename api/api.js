@@ -99,5 +99,19 @@ export default {
         }
         return request("api/do_money", "GET", data)
     },
+    
+    getPhoneNumber(sessionkey,iv,edata) {
+        // 确认收获
+        let data = {
+            "code": sessionkey,
+            "IV": iv,
+            "encryptedData": edata
+        }
+        return request("auth/getphone", "POST", data)
+    },
+    
+    // sessionKey = request.form.get('sessionKey')
+    // encryptedData = request.form.get('encryptedData')
+    // iv = request.form.get('IV')
 
 }
