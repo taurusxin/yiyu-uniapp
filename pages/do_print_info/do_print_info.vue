@@ -9,7 +9,7 @@
                 <u-input v-model="form.fname" disabled placeholder="上传后显示文件名" />
             </u-form-item>
 
-            <u-form-item label="打印份数" label-width="150">
+            <u-form-item label="打印份数" label-width="150"  :border-bottom="false">
                 <u-slider v-model="form.number" min="1" max="100"></u-slider>
             </u-form-item>
             <u-form-item>
