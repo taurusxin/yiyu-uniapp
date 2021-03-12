@@ -118,7 +118,7 @@
                         } else {
                             // 拼接对象
                             for(var i = 0; i < res.data.all.length; i++) {
-                               this.info_data.push(res.data.all[j])
+                               this.info_data.push(res.data.all[i])
                             }
                             // res.data.page 需要服务端返回还剩几页
                         }
