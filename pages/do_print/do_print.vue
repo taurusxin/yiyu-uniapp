@@ -55,7 +55,7 @@
             upload() {
                 let _this = this
                 let uploadTask = wx.uploadFile({
-                    url: 'http://127.0.0.1:5000/file/upload', //仅为示例，非真实的接口地址
+                    url: 'https://yiyv.miniapp.client.everdo.cn/file/upload', //仅为示例，非真实的接口地址
                     filePath: _this.file_path,
                     name: 'file', //随意
                     header: {
