@@ -1,200 +1,167 @@
 {
-	"easycom": {
-		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
-	},
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "首页"
-			}
-		},
-		{
-			"path": "pages/aboutme/aboutme",
-			"style": {
-				"navigationBarTitleText": "我的"
-			}
-		}
-	    ,{
-            "path" : "pages/classtable/classtable",
-            "style" :                                                                                    
-            {
+    "easycom": {
+        "^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+    },
+    "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+        {
+            "path": "pages/index/index",
+            "style": {
+                "navigationBarTitleText": "首页"
+            }
+        },
+        {
+            "path": "pages/aboutme/aboutme",
+            "style": {
+                "navigationBarTitleText": "我的"
+            }
+        }, {
+            "path": "pages/classtable/classtable",
+            "style": {
                 "navigationBarTitleText": "课程表",
                 "enablePullDownRefresh": false
             }
-            
-        }
-        ,{
-            "path" : "pages/login/login",
-            "style" :                                                                                    
-            {
+
+        }, {
+            "path": "pages/login/login",
+            "style": {
                 "navigationBarTitleText": "登录",
                 "enablePullDownRefresh": false
             }
-            
-        }
-        ,{
-            "path" : "pages/setting_jiaowu/setting_jiaowu",
-            "style" :                                                                                    
-            {
+
+        }, {
+            "path": "pages/setting_jiaowu/setting_jiaowu",
+            "style": {
                 "navigationBarTitleText": "教务系统绑定",
                 "enablePullDownRefresh": false
             }
-            
-        }
-        ,{
-            "path" : "pages/kefu/kefu",
-            "style" :                                                                                    
-            {
+
+        }, {
+            "path": "pages/kefu/kefu",
+            "style": {
                 "navigationBarTitleText": "客服",
                 "enablePullDownRefresh": false
             }
-            
-        }
-        ,{
-            "path" : "pages/setting_person/setting_person",
-            "style" :                                                                                    
-            {
+
+        }, {
+            "path": "pages/setting_person/setting_person",
+            "style": {
                 "navigationBarTitleText": "个人信息",
                 "enablePullDownRefresh": false
             }
-        }
-        ,{
-            "path" : "pages/setting_addr/setting_addr",
-            "style" :                                                                                    
-            {
+        }, {
+            "path": "pages/setting_addr/setting_addr",
+            "style": {
                 "navigationBarTitleText": "地址管理",
                 "enablePullDownRefresh": false
             }
-            
-        }
-        ,{
-            "path" : "pages/me_dfh/me_dfh",
-            "style" :                                                                                    
-            {
+
+        }, {
+            "path": "pages/me_dfh/me_dfh",
+            "style": {
                 "navigationBarTitleText": "待送达订单",
                 "enablePullDownRefresh": true
             }
-            
-        }
-        ,{
-            "path" : "pages/me_dsh/me_dsh",
-            "style" :                                                                                    
-            {
+
+        }, {
+            "path": "pages/me_dsh/me_dsh",
+            "style": {
                 "navigationBarTitleText": "待确认订单",
                 "enablePullDownRefresh": true
             }
-            
-        }
-        ,{
-            "path" : "pages/me_orders/me_orders",
-            "style" :                                                                                    
-            {
+
+        }, {
+            "path": "pages/me_orders/me_orders",
+            "style": {
                 "navigationBarTitleText": "我的订单",
-                "enablePullDownRefresh": true
+                "enablePullDownRefresh": true,
+                "onReachBottomDistance": 300
             }
-            
-        }
-        ,{
-            "path" : "pages/do_print/do_print",
-            "style" :                                                                                    
-            {
+
+        }, {
+            "path": "pages/do_print/do_print",
+            "style": {
                 "navigationBarTitleText": "代打印",
                 "enablePullDownRefresh": false
             }
-            
-        }
-        ,{
-            "path" : "pages/do_goods/do_goods",
-            "style" :                                                                                    
-            {
+
+        }, {
+            "path": "pages/do_goods/do_goods",
+            "style": {
                 "navigationBarTitleText": "拿外卖",
                 "enablePullDownRefresh": false
             }
-            
-        }
-        ,{
-            "path" : "pages/do_deliver/do_deliver",
-            "style" :                                                                                    
-            {
+
+        }, {
+            "path": "pages/do_deliver/do_deliver",
+            "style": {
                 "navigationBarTitleText": "拿快递",
                 "enablePullDownRefresh": false
             }
-            
-        }
-        ,{
-            "path" : "pages/do_join/do_join",
-            "style" :                                                                                    
-            {
+
+        }, {
+            "path": "pages/do_join/do_join",
+            "style": {
                 "navigationBarTitleText": "加入我们",
                 "enablePullDownRefresh": false
             }
-            
-        }
-        ,{
-            "path" : "pages/do_help/do_help",
-            "style" :                                                                                    
-            {
+
+        }, {
+            "path": "pages/do_help/do_help",
+            "style": {
                 "navigationBarTitleText": "获取帮助",
                 "enablePullDownRefresh": false
             }
-            
-        }
-        ,{
-            "path" : "pages/setting_addsite/setting_addsite",
-            "style" :                                                                                    
-            {
+
+        }, {
+            "path": "pages/setting_addsite/setting_addsite",
+            "style": {
                 "navigationBarTitleText": "设置地址",
                 "enablePullDownRefresh": false
             }
-            
-        }
-        ,{
-            "path" : "pages/do_print_info/do_print_info",
-            "style" :                                                                                    
-            {
+
+        }, {
+            "path": "pages/do_print_info/do_print_info",
+            "style": {
                 "navigationBarTitleText": "打印信息",
                 "enablePullDownRefresh": false
             }
-            
+
         }
     ],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uView",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	},
-	"tabBar": {
-	    "color": "#909399",
-	    "selectedColor": "#303133",
-	    "borderStyle": "black",
-	    "backgroundColor": "#ffffff",
-	    "list": [{
-	        "pagePath": "pages/classtable/classtable",
-	        "iconPath": "static/tab/kecheng_off.png",
-	        "selectedIconPath": "static/tab/kecheng.png",
-	        "text": "课表"
-	    }, {
-	        "pagePath": "pages/index/index",
-	        "iconPath": "static/tab/faxian_off.png",
-	        "selectedIconPath": "static/tab/faxian.png",
-	        "text": "发现"
-	    },{
-	        "pagePath": "pages/aboutme/aboutme",
-	        "iconPath": "static/tab/me_off.png",
-	        "selectedIconPath": "static/tab/me.png",
-	        "text": "我的"
-	    }]
-	},
-    "condition" : { //模式配置，仅开发期间生效
+    "globalStyle": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "uView",
+        "navigationBarBackgroundColor": "#F8F8F8",
+        "backgroundColor": "#F8F8F8"
+    },
+    "tabBar": {
+        "color": "#909399",
+        "selectedColor": "#303133",
+        "borderStyle": "black",
+        "backgroundColor": "#ffffff",
+        "list": [{
+            "pagePath": "pages/classtable/classtable",
+            "iconPath": "static/tab/kecheng_off.png",
+            "selectedIconPath": "static/tab/kecheng.png",
+            "text": "课表"
+        }, {
+            "pagePath": "pages/index/index",
+            "iconPath": "static/tab/faxian_off.png",
+            "selectedIconPath": "static/tab/faxian.png",
+            "text": "发现"
+        }, {
+            "pagePath": "pages/aboutme/aboutme",
+            "iconPath": "static/tab/me_off.png",
+            "selectedIconPath": "static/tab/me.png",
+            "text": "我的"
+        }]
+    },
+    "condition": { //模式配置，仅开发期间生效
         "current": 0, //当前激活的模式(list 的索引项)
-        "list": [
-            {
-                "name": "", //模式名称
-                "path": "pages/setting_jiaowu/setting_jiaowu", //启动页面，必选
-                "query": "" //启动参数，在页面的onLoad函数里面得到
-            }
-        ]
+        "list": [{
+            "name": "", //模式名称
+            "path": "pages/setting_jiaowu/setting_jiaowu", //启动页面，必选
+            "query": "" //启动参数，在页面的onLoad函数里面得到
+        }]
     }
 }

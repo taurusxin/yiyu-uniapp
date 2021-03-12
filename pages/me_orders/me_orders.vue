@@ -99,14 +99,14 @@
                     // 载入新页面
                     this.getOrderAll(this.page)
                 }
-            }, 2000)
+            }, 350)
         },
         methods: {
             getOrderAll(page) {
                 $api.getOrderAll(page).then(res => {
                     if (res.statusCode == 200) {
                         console.log("请求全部订单成功，返回如下：")
-                        console.log(this.info_data)
+                        console.log(res.data)
                         if (res.data.page == 0) {
                             this.status = 'nomore'
                         } else {
@@ -118,9 +118,10 @@
 
                         } else {
                             // 拼接对象
-                            for(var i = 0; i < res.data.all.length; i++) {
-                               this.info_data.push(res.data.all[i])
-                            }
+                            this.info_data = this.info_data.concat(res.data.all)
+                            // for(var i = 0; i < res.data.all.length; i++) {
+                            //    this.info_data.push(res.data.all[i])
+                            // }
                             // res.data.page 需要服务端返回还剩几页
                         }
                     } else {
