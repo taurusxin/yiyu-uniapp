@@ -55,7 +55,7 @@
             upload() {
                 let _this = this
                 let uploadTask = wx.uploadFile({
-                    url: 'http://43.128.26.205:6789/upload', //仅为示例，非真实的接口地址
+                    url: 'http://127.0.0.1:5000/file/upload', //仅为示例，非真实的接口地址
                     filePath: _this.file_path,
                     name: 'file', //随意
                     header: {
@@ -63,7 +63,8 @@
                         'token': uni.getStorageSync("token"), //如果需要token的话要传
                     },
                     formData: {
-                        method: 'POST' //请求方式
+                        method: 'POST', //请求方式
+												origin_name: _this.file_name
                     },
                     success(res) {
                         if (res.statusCode == 200) {
