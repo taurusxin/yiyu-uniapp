@@ -82,6 +82,7 @@
         },
         onPullDownRefresh() {
             this.getOrderAll(1)
+            this.page = 1  // 页码回到第一页
             this.$nextTick(function() {
                 setTimeout(function() {
                     // 不加这个方法真机下拉会一直处于刷新状态，无法复位
