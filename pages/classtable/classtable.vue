@@ -1,6 +1,7 @@
 <template>
     <!-- 老师课表 -->
     <view class="time-table width-100-bfb flex flex-direction" style="height: 100vh">
+        <u-top-tips ref="uTips"></u-top-tips>
         <view class="">
             <view class="cu-bar bg-white text-primary">
                 <view class="action" @click="previousWeek">
@@ -164,8 +165,17 @@
                     endTime: this.sundayDayTimeStamp
                 }
                 $api.getClassTable(data).then((res) => {
-                    console.log(res)
-                    this.list = res.data.classtable
+                    if (res.statusCode == 200){
+                        console.log(res)
+                        this.list = res.data.classtable
+                    }else{
+                        this.list = [[],[],[],[],[],[],[]]
+                        this.$refs.uTips.show({
+                            title: res.data.errmsg,
+                            type: 'warning',
+                            duration: '2300'
+                        })
+                    }
                 })
             },
             async nextWeek() {
@@ -193,8 +203,17 @@
                     endTime: this.sundayDayTimeStamp
                 }
                 $api.getClassTable(data).then((res) => {
-                    console.log(res)
-                    this.list = res.data.classtable
+                    if (res.statusCode == 200){
+                        console.log(res)
+                        this.list = res.data.classtable
+                    }else{
+                        this.list = [[],[],[],[],[],[],[]]
+                        this.$refs.uTips.show({
+                            title: res.data.errmsg,
+                            type: 'warning',
+                            duration: '2300'
+                        })
+                    }
                 })
             },
             async thisWeek() {
@@ -209,8 +228,17 @@
                     endTime: this.sundayDayTimeStamp
                 }
                 $api.getClassTable(data).then((res) => {
-                    console.log(res)
-                    this.list = res.data.classtable
+                    if (res.statusCode == 200){
+                        console.log(res)
+                        this.list = res.data.classtable
+                    }else{
+                        this.list = [[],[],[],[],[],[],[]]
+                        this.$refs.uTips.show({
+                            title: res.data.errmsg,
+                            type: 'warning',
+                            duration: '2300'
+                        })
+                    }
                 })
             },
             dayList() {
