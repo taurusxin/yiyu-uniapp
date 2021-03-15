@@ -64,7 +64,7 @@
                     },
                     formData: {
                         method: 'POST', //请求方式
-												origin_name: _this.file_name
+                        origin_name: _this.file_name
                     },
                     success(res) {
                         if (res.statusCode == 200) {
@@ -76,7 +76,7 @@
                             _this.showTopToast("上传成功", "success")
                             //TODO 这里应该要让后端返回一个文件ID
                             // 然后拿着文件ID再到表单填写页面去
-                            let fid = 123
+                            let fid = data.fid
                             uni.navigateTo({
                                 url: '/pages/do_print_info/do_print_info?fid=' + fid + '&fname=' + _this
                                     .file_name,
@@ -87,37 +87,11 @@
                         } else {
                             console.log('上传失败，状态码：' + res.statusCode)
                             _this.showTopToast("上传失败 " + res.data.errmsg, "warning")
-
-
-                            //TODO 测试用完后移除
-                            let fid = 123
-                            uni.navigateTo({
-                                url: '/pages/do_print_info/do_print_info?fid=' + fid + '&fname=' + _this
-                                    .file_name,
-                                success: res => {},
-                                fail: () => {},
-                                complete: () => {}
-                            });
-                            //TODO end
-
                         }
                     },
                     fail(res) {
                         console.log('上传失败')
                         _this.showTopToast("上传失败，网络异常", "warning")
-                        
-                        //TODO 测试用完后移除
-                        let fid = 123
-                        uni.navigateTo({
-                            url: '/pages/do_print_info/do_print_info?fid=' + fid + '&fname=' + _this
-                                .file_name,
-                            success: res => {},
-                            fail: () => {},
-                            complete: () => {}
-                        });
-                        //TODO end
-                        
-                        
                     }
                 })
 
@@ -149,7 +123,7 @@
             justify-content: start;
             align-items: center;
         }
-        
+
         .info {
             display: flex;
             flex-direction: column;
