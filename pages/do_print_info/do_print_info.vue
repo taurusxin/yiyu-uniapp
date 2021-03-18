@@ -9,7 +9,7 @@
                 <u-input v-model="form.fname" disabled placeholder="上传后显示文件名" />
             </u-form-item>
 
-            <u-form-item label="打印份数" label-width="150"  :border-bottom="false">
+            <u-form-item label="打印份数" label-width="150" :border-bottom="false">
                 <u-slider v-model="form.number" min="1" max="100"></u-slider>
             </u-form-item>
             <u-form-item>
@@ -51,7 +51,7 @@
     export default {
         data() {
             return {
-                price: 1.5,
+                price: null,
                 toastwindow: {
                     back: false,
                     show: false,
@@ -149,25 +149,10 @@
                     }
                 } else {
                     console.log("状态码不为200，地址获取失败")
-
-                    // TODO remove when api finished
-                    this.addrSheetList = [{
-                            text: '广东省深圳市宝安区 自由路66号'
-                        },
-                        {
-                            text: '广东省深圳市宝安区 翻身路xx号'
-                        },
-                        {
-                            text: '广东省深圳市宝安区 平安路13号'
-                        }
-                    ]
-                    // TODO remove when api finished
-
                 }
             }).catch((err) => {
                 console.log(err)
             })
-
             $api.getMoney('ddy').then(res => {
                 if (res.statusCode == 200) {
                     this.price = res.data.money

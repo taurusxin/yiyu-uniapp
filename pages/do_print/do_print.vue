@@ -27,7 +27,7 @@
                 file_path: '',
                 tempFilePaths: '',
                 upprogress: 0,
-								disabled: false
+                disabled: false
             };
         },
         methods: {
@@ -54,7 +54,7 @@
                 })
             },
             upload() {
-							this.disabled = true
+                this.disabled = true
                 let _this = this
                 let uploadTask = wx.uploadFile({
                     url: 'https://yiyv.miniapp.client.everdo.cn/file/upload', //仅为示例，非真实的接口地址
