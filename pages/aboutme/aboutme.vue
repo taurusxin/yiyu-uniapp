@@ -48,7 +48,7 @@
                     </view>
                     <view style="margin-top: 20rpx;">
                         <u-cell-group>
-                            <u-cell-item icon="info-circle" title="关于我们" :arrow="false" value="v0.1.2dev"></u-cell-item>
+                            <u-cell-item icon="info-circle" title="关于我们" :arrow="false" value="v0.1.23 RC1"></u-cell-item>
                         </u-cell-group>
                     </view>
                 </view>
