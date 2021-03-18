@@ -14,7 +14,7 @@
             <!-- {{file_path}} -->
         </view>
         <view style="height: 300rpx;width: 330rpx;">
-            <u-button type="primary" plain @click="upload">上传</u-button>
+            <u-button type="primary" plain @click="upload" :disabled="disabled">上传</u-button>
         </view>
     </view>
 </template>
@@ -26,7 +26,8 @@
                 file_name: '',
                 file_path: '',
                 tempFilePaths: '',
-                upprogress: 0
+                upprogress: 0,
+								disabled: false
             };
         },
         methods: {
@@ -53,6 +54,7 @@
                 })
             },
             upload() {
+							this.disabled = true
                 let _this = this
                 let uploadTask = wx.uploadFile({
                     url: 'https://yiyv.miniapp.client.everdo.cn/file/upload', //仅为示例，非真实的接口地址
