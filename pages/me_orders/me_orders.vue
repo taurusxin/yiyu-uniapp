@@ -23,7 +23,9 @@
                     <u-icon name="clock-fill" size="34" color="" :label="item.time"></u-icon>
                 </view>
                 <view style="font-weight: 800;">
-                    <u-tag v-if="item.status < 1" text="待送达"></u-tag>
+                    <u-tag v-if="item.status == 0" text="待接单"></u-tag>
+                    <u-tag v-if="item.status == 0.3" text="待发货"></u-tag>
+                    <u-tag v-if="item.status == 0.7" text="派送中"></u-tag>
                     <u-tag v-if="item.status == 1" text="待收货" type="warning"></u-tag>
                     <u-tag v-if="item.status > 1" text="已确认" type="success"></u-tag>
                 </view>
