@@ -32,7 +32,19 @@
             </view>
         </u-card>
 
-        <view style="margin: 50px 0 50px 0;">
+        <view v-if="info_data.length === 0" style="height: calc(100vh - 60rpx);display: flex;justify-content: center;">
+            <view style="display: flex;justify-content: center;flex-direction: column;">
+                <view style="margin-top: -150rpx;">
+                    <image src="../../static/empty.png" style="width: 100px; height: 80px;"></image>
+                </view>
+                <view style="margin-top: 30rpx; text-align: center;">
+                    <text>
+                        这里什么都没有
+                    </text>
+                </view>
+            </view>
+        </view>
+        <view v-else style="margin: 50px 0 50px 0;">
             <u-loadmore :status="status" />
         </view>
     </view>
@@ -45,38 +57,7 @@
             return {
                 page: 1, //这是前端存放当前请求到第几页的flag
                 status: 'nomore',
-                info_data: [{
-                        "id": 1, //订单号
-                        "type": "deliver", //订单类型
-                        "desca": "快递号：SF12123789127",
-                        "descb": "取件码：7777",
-                        "status": 0.3,
-                        "time": "2020-05-15 19:00" //下单时间
-                    },
-                    {
-                        "id": 2,
-                        "type": "print",
-                        "desca": "文件名：期末复习题.docx",
-                        "descb": "",
-                        "status": 2, //约定 >0.7 的状态前端就是将派送
-                        "time": "2020-05-15 12:00"
-                    }, {
-                        "id": 3, //订单号
-                        "type": "deliver", //订单类型
-                        "desca": "快递号：SF12123789127",
-                        "descb": "取件码：7777",
-                        "status": 0.3,
-                        "time": "2020-05-15 19:00" //下单时间
-                    },
-                    {
-                        "id": 4,
-                        "type": "print",
-                        "desca": "文件名：期末复习题.docx",
-                        "descb": "",
-                        "status": 2, //约定 >0.7 的状态前端就是将派送
-                        "time": "2020-05-15 12:00"
-                    }
-                ],
+                info_data: [],
             };
         },
         onShow() {
@@ -84,7 +65,7 @@
         },
         onPullDownRefresh() {
             this.getOrderAll(1)
-            this.page = 1  // 页码回到第一页
+            this.page = 1 // 页码回到第一页
             this.$nextTick(function() {
                 setTimeout(function() {
                     // 不加这个方法真机下拉会一直处于刷新状态，无法复位
