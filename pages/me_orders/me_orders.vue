@@ -2,8 +2,8 @@
     <view class="info_content">
         <u-top-tips ref="uTips"></u-top-tips>
         <u-card v-for="item in info_data" :key="item.id" :title="'订单号：'+item.id"
-            :sub-title="item.type == 'print' ? '代打印' : '取快递'"
-            :thumb="item.type == 'print' ? '/static/list/printer.png' : '/static/list/delivery.png'"
+            :sub-title="listTitle(item)"
+            :thumb="thumbPic(item)"
             :thumb-circle="true" :head-border-bottom="false" margin="0rpx 0rpx 20rpx 0rpx"
             box-shadow="1px 1px 3px #e1e1e1">
             <view class="" slot="body">
@@ -86,6 +86,26 @@
             }, 350)
         },
         methods: {
+            listTitle(item){
+                if(item.type == 'print'){
+                    return '代打印'
+                }
+                else if(item.type == 'deliver'){
+                    return '取快递'
+                }else{
+                    return '充值'
+                }
+            },
+            thumbPic(item){
+                if(item.type == 'print'){
+                    return '/static/list/printer.png'
+                }
+                else if(item.type == 'deliver'){
+                    return '/static/list/delivery.png'
+                }else{
+                    return '/static/list/money.png'
+                }
+            },
             getOrderAll(page) {
                 $api.getOrderAll(page).then(res => {
                     if (res.statusCode == 200) {
