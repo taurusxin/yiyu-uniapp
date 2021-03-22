@@ -17,10 +17,10 @@
                 <view v-if="item.descb.length != 0" class="u-body-item u-flex u-col-between u-p-t-0">
                     <view class="u-body-item-title u-line-2">{{item.descb}}</view>
                 </view>
-                <!--                <view>
+                <view>
                     <u-line-progress :striped="true" :percent="item.status * 100" :striped-active="true"
                         :show-percent="true"></u-line-progress>
-                </view> -->
+                </view>
             </view>
             <view class="card_foot" slot="foot">
                 <view style="font-size:25rpx ;">

@@ -13,7 +13,7 @@
                 <view v-if="item.descb.length != 0" class="u-body-item u-flex u-col-between u-p-t-0">
                     <view class="u-body-item-title u-line-2">{{item.descb}}</view>
                 </view>
-                <view v-if="item.status < 1">
+                <view v-if="item.status <= 1">
                     <u-line-progress :striped="true" :percent="item.status * 100" :striped-active="true"
                         :show-percent="true"></u-line-progress>
                 </view>
@@ -27,7 +27,8 @@
                     <u-tag v-if="item.status == 0.3" text="待发货"></u-tag>
                     <u-tag v-if="item.status == 0.7" text="派送中"></u-tag>
                     <u-tag v-if="item.status == 1" text="待收货" type="warning"></u-tag>
-                    <u-tag v-if="item.status > 1" text="已确认" type="success"></u-tag>
+                    <u-tag v-if="item.status > 1 && item.type != 'recharge'" text="已确认" type="success"></u-tag>
+                    <u-tag v-if="item.status > 1 && item.type == 'recharge'" text="钱包充值" type="info"></u-tag>
                 </view>
             </view>
         </u-card>
