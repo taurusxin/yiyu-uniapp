@@ -1,7 +1,10 @@
 <template>
     <view class="content">
+        <u-modal v-model="personinfowindow.show" :content="personinfowindow.content" @confirm="confirmFillInfo" @cancel="cancelFillInfo"
+            show-cancel-button>
+        </u-modal>
         <!-- 点击提示 -->
-        <u-modal v-model="toastwindow.show" :content="toastwindow.content" :async-close="true" @confirm="toastConfirm">
+        <u-modal v-model="toastwindow.show" :content="toastwindow.content" :async-close="true" @confirm="confirmDoDeliver">
         </u-modal>
         <!-- 点击提示结束 -->
         <u-form :model="form" ref="uForm">
@@ -51,6 +54,11 @@
         data() {
             return {
                 price: 2,
+                personinfowindow: {
+                    back: false,
+                    show: false,
+                    content: ""
+                },
                 toastwindow: {
                     back: false,
                     show: false,
@@ -98,7 +106,23 @@
             };
         },
         methods: {
-            toastConfirm(back) {
+            cancelFillInfo() {
+                uni.switchTab({
+                    url: '/pages/index/index',
+                    success: res => {},
+                    fail: () => {},
+                    complete: () => {}
+                })
+            },
+            confirmFillInfo() {
+                uni.navigateTo({
+                    url: '/pages/setting_person/setting_person',
+                    success: res => {},
+                    fail: () => {},
+                    complete: () => {}
+                });
+            },
+            confirmDoDeliver(back) {
                 this.toastwindow.show = false
                 if (this.toastwindow.back) {
                     uni.switchTab({
@@ -109,7 +133,11 @@
                     })
                 }
             },
-            showWindow(content) {
+            showPersonInfoWindow(content) {
+                this.personinfowindow.show = true,
+                    this.personinfowindow.content = content
+            },
+            showSubmitWindow(content) {
                 this.toastwindow.show = true,
                     this.toastwindow.content = content
             },
@@ -131,11 +159,11 @@
                         $api.setDeliverOrder(this.form).then(res => {
                             if (res.statusCode == 200) {
                                 console.log("成功提交数据到服务端")
-                                this.showWindow("取件提交成功！")
+                                this.showSubmitWindow("取件提交成功！")
                                 this.toastwindow.back = true
                             } else {
                                 this.toastwindow.back = false
-                                this.showWindow(res.data.errmsg)
+                                this.showSubmitWindow(res.data.errmsg)
                             }
                         }).catch((e) => {
                             console.log("取件提交失败")
@@ -157,34 +185,27 @@
             this.$refs.uForm.setRules(this.rules);
         },
         onShow() {
-            // TODO 获取地址列表
+            $api.getPersonSetting().then(res => {
+                console.log(res)
+                if (res.statusCode == 200) {} else {
+                    console.log("用户还没完善个人信息")
+                    this.showPersonInfoWindow("您还没有完善个人信息，请先完善")
+                }
+            }).catch((err) => {
+                console.log(err)
+            })
             // 页面启动的时候先向服务端拉去已有数据
             $api.getPersonAddr().then(res => {
                 console.log(res)
                 if (res.statusCode == 200) {
-                    // this.addrSheetList = res.data.siteList
                     for (let i = 0; i < res.data.siteList.length; i++) {
                         this.addrSheetList[i] = {
-                            text : res.data.siteList[i].name + " - " + res.data.siteList[i].site
+                            text: res.data.siteList[i].name + " - " + res.data.siteList[i].site
                         }
                     }
                     // console.log(this.addrSheetList)
                 } else {
                     console.log("状态码不为200，地址获取失败")
-
-                    // TODO remove when api finished
-                    this.addrSheetList = [{
-                            text: '广东省深圳市宝安区 自由路66号'
-                        },
-                        {
-                            text: '广东省深圳市宝安区 翻身路xx号'
-                        },
-                        {
-                            text: '广东省深圳市宝安区 平安路13号'
-                        }
-                    ]
-                    // TODO remove when api finished
-
                 }
             }).catch((err) => {
                 console.log(err)

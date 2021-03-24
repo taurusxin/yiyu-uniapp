@@ -1,5 +1,8 @@
 <template>
     <view class="content">
+        <u-modal v-model="toastwindow.show" :content="toastwindow.content" @confirm="confirm" @cancel="cancel"
+            show-cancel-button>
+        </u-modal>
         <u-top-tips ref="uTips"></u-top-tips>
         <view class="plus" @click="choseFile">
             <u-icon name="plus-circle-fill" style="margin-right: 20rpx;">
@@ -20,6 +23,7 @@
 </template>
 
 <script>
+    import $api from "../../api/api.js"
     export default {
         data() {
             return {
@@ -27,10 +31,45 @@
                 file_path: '',
                 tempFilePaths: '',
                 upprogress: 0,
-                disabled: false
+                disabled: false,
+                toastwindow: {
+                    show: false,
+                    content: ""
+                },
             };
         },
+        onShow() {
+            $api.getPersonSetting().then(res => {
+                console.log(res)
+                if (res.statusCode == 200) {} else {
+                    console.log("用户还没完善个人信息")
+                    this.showWindow("您还没有完善个人信息，请先完善")
+                }
+            }).catch((err) => {
+                console.log(err)
+            })
+        },
         methods: {
+            cancel() {
+                uni.switchTab({
+                    url: '/pages/index/index',
+                    success: res => {},
+                    fail: () => {},
+                    complete: () => {}
+                })
+            },
+            confirm() {
+                uni.navigateTo({
+                    url: '/pages/setting_person/setting_person',
+                    success: res => {},
+                    fail: () => {},
+                    complete: () => {}
+                });
+            },
+            showWindow(content) {
+                this.toastwindow.show = true,
+                    this.toastwindow.content = content
+            },
             showTopToast(title, type) {
                 this.$refs.uTips.show({
                     title: title,

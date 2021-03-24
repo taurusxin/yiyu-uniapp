@@ -126,7 +126,10 @@
                 sundayDayTimeStamp: 0 // 星期天的时间戳,
             };
         },
-        async created() {
+        // async created() {
+        //     this.thisWeek(); // 一开始进入页面获取本周的课程表
+        // },
+        async onShow() {
             this.thisWeek(); // 一开始进入页面获取本周的课程表
         },
         methods: {
