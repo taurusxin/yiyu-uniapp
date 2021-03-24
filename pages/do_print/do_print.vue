@@ -1,7 +1,7 @@
 <template>
     <view class="content">
-        <u-modal v-model="toastwindow.show" :content="toastwindow.content" @confirm="confirm" @cancel="cancel"
-            show-cancel-button>
+        <u-modal v-model="toastwindow.show" :content="toastwindow.content" @confirm="confirmFillInfo"
+            @cancel="cancelFillInfo" show-cancel-button>
         </u-modal>
         <u-top-tips ref="uTips"></u-top-tips>
         <view class="plus" @click="choseFile">
@@ -50,7 +50,7 @@
             })
         },
         methods: {
-            cancel() {
+            cancelFillInfo() {
                 uni.switchTab({
                     url: '/pages/index/index',
                     success: res => {},
@@ -58,7 +58,7 @@
                     complete: () => {}
                 })
             },
-            confirm() {
+            confirmFillInfo() {
                 uni.navigateTo({
                     url: '/pages/setting_person/setting_person',
                     success: res => {},

@@ -59,7 +59,7 @@
                     show: false,
                     content: ""
                 },
-                toastwindow: {
+                submittoastwindow: {
                     back: false,
                     show: false,
                     content: ""
@@ -138,8 +138,8 @@
                     this.personinfowindow.content = content
             },
             showSubmitWindow(content) {
-                this.toastwindow.show = true,
-                    this.toastwindow.content = content
+                this.submittoastwindow.show = true,
+                    this.submittoastwindow.content = content
             },
             setAddr() {
                 uni.navigateTo({
