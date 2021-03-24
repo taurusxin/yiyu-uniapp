@@ -117,7 +117,7 @@ export default {
 
     getReminderQR(data) {
         // 传“我的”页面的四个角标
-        return request("api/gzhqr", "GET", data)
+        return request("auth/gzhqr", "GET", data)
     },
 
 

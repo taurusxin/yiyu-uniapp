@@ -166,7 +166,7 @@
 
                             $api.getReminderQR().then(qr => {
 
-                                this.showWindow("开启成功，请继续完成绑定后使用<br><img src='" + res.data.qrurl +
+                                this.showWindow("开启成功，请继续完成绑定后使用<br><img src='" + qr.data.qrurl +
                                     "'/>")
                                 this.getReminder()
 
