@@ -104,7 +104,7 @@
                         key: 4,
                         name: '我的活动',
                         url: '../../static/fumou-center-template/7.png',
-                        addr: '/pages/do_activity/do_activity',
+                        addr: '/pages/me_hd/me_hd',
                         num: 0
                     },
                 ],

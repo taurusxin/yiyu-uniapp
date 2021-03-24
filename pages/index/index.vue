@@ -3,7 +3,7 @@
         <!-- 引入登录按钮组件 -->
         <!-- <button type="default" @click="goLogin">登录页面测试</button> -->
         <view class="swiper">
-            <u-swiper @tap="goClassDesc" :list="swiper_list" :effect3d="true" height="350" bg-color="#FFFFFF">
+            <u-swiper @click="goPicDesc" :list="swiper_list" :effect3d="true" height="350" bg-color="#FFFFFF">
             </u-swiper>
         </view>
         <u-grid :col="3">
@@ -46,19 +46,7 @@
         data() {
             return {
                 // 后期要删掉这里的数据
-                swiper_list: [{
-                        image: 'https://cdn.uviewui.com/uview/swiper/1.jpg',
-                        title: '昨夜星辰昨夜风，画楼西畔桂堂东'
-                    },
-                    {
-                        image: 'https://cdn.uviewui.com/uview/swiper/2.jpg',
-                        title: '身无彩凤双飞翼，心有灵犀一点通'
-                    },
-                    {
-                        image: 'https://cdn.uviewui.com/uview/swiper/3.jpg',
-                        title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
-                    }
-                ],
+                swiper_list: [],
             }
         },
         onLoad() {
@@ -69,12 +57,40 @@
             this.getSwiperData()
         },
         methods: {
+            goPicDesc(index) {
+                let id = this.swiper_list[index].id
+                console.log("点击轮播图的序号 " + index + " ID为 " + id)
+                uni.navigateTo({
+                    url: '../swiper_desc/swiper_desc?' + `id=${id}`,
+                    success: res => {},
+                    fail: () => {},
+                    complete: () => {}
+                });
+            },
             getSwiperData() {
                 $api.getIndexSwiper().then(
                     res => {
                         console.log(res.data)
                         //获取头图
                         this.swiper_list = res.data.swiper_list
+                        // TODO 当API固定后删除下方
+                        this.swiper_list = [{
+                                id: 1,
+                                image: 'https://cdn.uviewui.com/uview/swiper/1.jpg',
+                                title: '昨夜星辰昨夜风，画楼西畔桂堂东'
+                            },
+                            {
+                                id: 2,
+                                image: 'https://cdn.uviewui.com/uview/swiper/2.jpg',
+                                title: '身无彩凤双飞翼，心有灵犀一点通'
+                            },
+                            {
+                                id: 3,
+                                image: 'https://cdn.uviewui.com/uview/swiper/3.jpg',
+                                title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
+                            }
+                        ]
+                        // TODO 当API固定后删除上方
                     },
                 ).catch(
                     err => {}
