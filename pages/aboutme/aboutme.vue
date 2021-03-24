@@ -20,6 +20,9 @@
                 <view class="order_status">
 
                     <view class="status" v-for="item in status" @click="goPage(item.addr)">
+                        <view style="margin: -20rpx 0 0 10rpx;width: 210rpx; height: 20rpx;">
+                            <u-badge size="mini" type="error" :count="item.num" :absolute="false"></u-badge>
+                        </view>
                         <image class="icon" :src="item.url" mode="aspectFill"></image>
                         <text>{{item.name}}</text>
                     </view>
@@ -48,7 +51,12 @@
                     </view>
                     <view style="margin-top: 20rpx;">
                         <u-cell-group>
-                            <u-cell-item icon="info-circle" title="关于我们" :arrow="false" value="v0.1.23 RC1"></u-cell-item>
+                            <u-cell-item icon="kefu-ermai" title="人工客服" :arrow="true"
+                                @click="goPage('/pages/kefu/kefu')"></u-cell-item>
+                        </u-cell-group>
+                        <u-cell-group>
+                            <u-cell-item icon="info-circle" title="关于我们" :arrow="false" value="v0.1.23 RC1">
+                            </u-cell-item>
                         </u-cell-group>
                     </view>
                 </view>
@@ -75,25 +83,29 @@
                         key: 1,
                         name: '待送达',
                         url: '../../static/fumou-center-template/one.png',
-                        addr: '/pages/me_dfh/me_dfh'
+                        addr: '/pages/me_dfh/me_dfh',
+                        num: 0
                     },
                     {
                         key: 2,
                         name: '待确认',
                         url: '../../static/fumou-center-template/2.png',
-                        addr: '/pages/me_dsh/me_dsh'
+                        addr: '/pages/me_dsh/me_dsh',
+                        num: 1
                     },
                     {
                         key: 3,
                         name: '全部订单',
                         url: '../../static/fumou-center-template/4.png',
-                        addr: '/pages/me_orders/me_orders'
+                        addr: '/pages/me_orders/me_orders',
+                        num: 3
                     },
                     {
                         key: 4,
-                        name: '人工客服',
-                        url: '../../static/fumou-center-template/3.png',
-                        addr: '/pages/kefu/kefu'
+                        name: '我的活动',
+                        url: '../../static/fumou-center-template/7.png',
+                        addr: '/pages/do_activity/do_activity',
+                        num: 0
                     },
                 ],
             };

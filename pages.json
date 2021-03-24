@@ -85,16 +85,16 @@
             }
 
         }, {
-            "path": "pages/do_goods/do_goods",
+            "path": "pages/do_deliver/do_deliver",
             "style": {
-                "navigationBarTitleText": "拿外卖",
+                "navigationBarTitleText": "拿快递",
                 "enablePullDownRefresh": false
             }
 
         }, {
-            "path": "pages/do_deliver/do_deliver",
+            "path": "pages/do_activity/do_activity",
             "style": {
-                "navigationBarTitleText": "拿快递",
+                "navigationBarTitleText": "当前活动",
                 "enablePullDownRefresh": false
             }
 
@@ -125,8 +125,9 @@
                 "navigationBarTitleText": "打印信息",
                 "enablePullDownRefresh": false
             }
-
+            
         }
+
     ],
     "globalStyle": {
         "navigationBarTextStyle": "black",
