@@ -1,8 +1,18 @@
 <template>
 
     <view class="center">
+        <view>
+            <u-modal v-model="toastwindow.show">
+                <view class="slot-content">
+                    <rich-text :nodes="toastwindow.content"></rich-text>
+                </view>
+            </u-modal>
+            <u-button @click="open">
+                打开模态框
+            </u-button>
+        </view>
         <!-- 点击提示 -->
-        <u-modal v-model="toastwindow.show" :content="toastwindow.content"></u-modal>
+        <!-- <u-modal v-model="toastwindow.show" :content="toastwindow.content"></u-modal> -->
         <!-- 点击提示结束 -->
         <view class="center_top">
             <view class="mask">
@@ -71,6 +81,8 @@
     export default {
         data() {
             return {
+                show: false,
+                content: `空山新雨后<br>天气晚来秋`,
                 avatarurl: "",
                 nickname: "您未登录",
                 setting_remind: true,
@@ -151,8 +163,16 @@
                     // 此处需要API，成功后显示window
                     $api.setReminder(true).then((res) => {
                         if (res.statusCode == 200) {
-                            this.showWindow("课表提醒已开启")
-                            this.getReminder()
+
+                            $api.getReminderQR().then(qr => {
+
+                                this.showWindow("开启成功，请继续完成绑定后使用<br><img src='" + res.data.qrurl +
+                                    "'/>")
+                                this.getReminder()
+
+                            })
+
+
                         } else {
                             this.showWindow("开启失败，请重试")
                             this.getReminder()
@@ -206,6 +226,13 @@
 <style lang="scss">
     page {
         height: 100%;
+    }
+
+    .slot-content {
+        margin: 30rpx 5rpx 30rpx 5rpx;
+        font-size: 28rpx;
+        color: $u-content-color;
+        text-align: center;
     }
 
     .profily,
