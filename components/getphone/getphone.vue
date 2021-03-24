@@ -1,8 +1,8 @@
 <template>
     <view class="button">
         <u-modal v-model="toastwindow.show" :content="toastwindow.content"></u-modal>
-        <u-button type="info" ripple="true" plain="true" class="loginbutton" :ripple="true"
-            @getphonenumber="getPhone" open-type="getPhoneNumber">
+        <u-button type="info" ripple="true" plain="true" class="loginbutton" :ripple="true" @getphonenumber="getPhone"
+            open-type="getPhoneNumber">
             <!-- <u-icon name="weixin-fill" style="margin-right: 20rpx;"> -->
             </u-icon>获取手机号
         </u-button>
@@ -24,6 +24,7 @@
                     show: false,
                     content: ""
                 },
+                permition: true,
             }
         },
         created() {
@@ -36,13 +37,15 @@
             },
             getPhone(e) {
                 console.log(e.detail.errMsg)
-                console.log(e.detail.iv)
-                console.log(e.detail.encryptedData)
-                $api.getPhoneNumber(this.code, e.detail.iv, e.detail.encryptedData).then(res => {
-                    // console.log(res.data)
-                    this.phone = res.data.purePhoneNumber
-                    this.$emit('getPhone', this.phone)
-                })
+                if (e.detail.iv) {
+                    console.log(e.detail.iv)
+                    console.log(e.detail.encryptedData)
+                    $api.getPhoneNumber(this.code, e.detail.iv, e.detail.encryptedData).then(res => {
+                        // console.log(res.data)
+                        this.phone = res.data.purePhoneNumber
+                        this.$emit('getPhone', this.phone)
+                    })
+                }
             },
             trydoLogin() {
                 // 去掉下面一行跳转tabbar不会生效
@@ -58,6 +61,9 @@
                         } else {
                             console.log('手机获取-微信登录发起失败！' + res.errMsg)
                         }
+                    },
+                    fail(err) {
+                        console.log("手机获取-微信登录发起失败！")
                     }
                 })
             }
