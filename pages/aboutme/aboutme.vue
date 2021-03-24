@@ -91,14 +91,14 @@
                         name: '待确认',
                         url: '../../static/fumou-center-template/2.png',
                         addr: '/pages/me_dsh/me_dsh',
-                        num: 1
+                        num: 0
                     },
                     {
                         key: 3,
                         name: '全部订单',
                         url: '../../static/fumou-center-template/4.png',
                         addr: '/pages/me_orders/me_orders',
-                        num: 3
+                        num: 0
                     },
                     {
                         key: 4,
@@ -114,6 +114,17 @@
             getMoney(type) {
                 $api.getMoney(type).then(res => {
                     this.money = res.data.money
+                })
+            },
+            getMeNum() {
+                $api.getMeMum().then(res => {
+                    let num = res.data.num
+                    // TODO API完成后移除
+                    num = [1, 0, 3, 5]
+                    // TODO API完成后移除
+                    for (let i = 0; i < num.length; i++) {
+                        this.status[i].num = num[i]
+                    }
                 })
             },
             getReminder() {
@@ -184,6 +195,7 @@
                 console.log(this.avatarurl)
             }
             this.getMoney("user")
+            this.getMeNum()
         },
         onLoad() {
             this.getReminder()

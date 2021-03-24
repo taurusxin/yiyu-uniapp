@@ -110,8 +110,9 @@ export default {
         return request("auth/getphone", "POST", data)
     },
     
-    // sessionKey = request.form.get('sessionKey')
-    // encryptedData = request.form.get('encryptedData')
-    // iv = request.form.get('IV')
+    getMeMum(data) {
+        // 传“我的”页面的四个角标
+        return request("api/menum", "GET", data)
+    },
 
 }
