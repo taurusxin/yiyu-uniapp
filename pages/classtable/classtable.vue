@@ -34,11 +34,15 @@
                             <view class="cu-item flex justify-between margin-lr text-xl height-50 ">
                                 <view class="text-lg">
                                     <text class="cuIcon-time text-orange"></text>
-                                    <text class="margin-lr-xs text-bold">{{ items.time }}</text>
+                                    <text class="margin-lr-xs text-bold">{{ items.num }}</text>
                                 </view>
                             </view>
                         </view>
                         <view class="text-lg">
+                            <view style="height: 60rpx;">
+                                <text class="title padding-right-unset">时间：</text>
+                                <text>{{ items.time }}</text>
+                            </view>
                             <view style="height: 60rpx;">
                                 <text class="title padding-right-unset">课程：</text>
                                 <text>{{ items.courseName }}</text>
