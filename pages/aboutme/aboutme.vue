@@ -1,5 +1,4 @@
 <template>
-
     <view class="center">
         <view>
             <u-modal v-model="toastwindow.show">
@@ -192,12 +191,9 @@
                         this.showWindow("关闭失败（网络错误）")
                     })
                 }
-
             }
         },
-        computed: {
-
-        },
+        computed: {},
         onShow() {
             console.log($Storage.getUserinfo())
             let userinfo = $Storage.getUserinfo()
@@ -212,10 +208,9 @@
             }
             this.getMoney("user")
             this.getMeNum()
-        },
-        onLoad() {
             this.getReminder()
-        }
+        },
+        onLoad() {}
     }
 </script>
 
@@ -230,11 +225,6 @@
         color: $u-content-color;
         text-align: center;
         max-height: 260px;
-    }
-
-    .slot-content img {
-        width: 100px;
-        height: 100px;
     }
 
     .profily,
