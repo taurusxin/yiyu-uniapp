@@ -120,7 +120,7 @@
                 $api.getMeMum().then(res => {
                     let num = res.data.num
                     // TODO API完成后移除下方 bum
-                    num = [1, 0, 3, 5]
+                    // num = [1, 0, 3, 5]
                     // TODO API完成后移除上方 num
                     for (let i = 0; i < num.length; i++) {
                         this.status[i].num = num[i]
