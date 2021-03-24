@@ -86,12 +86,12 @@ export default {
         // 提交打印订单
         return request("api/do_print", "POST", data)
     },
-    
+
     setDeliverOrder(data) {
         // 提交取快递订单
         return request("api/do_deliver", "POST", data)
     },
-    
+
     getMoney(type) {
         // 金钱接口（查询余额，显示价格）
         let data = {
@@ -99,8 +99,8 @@ export default {
         }
         return request("api/do_money", "GET", data)
     },
-    
-    getPhoneNumber(sessionkey,iv,edata) {
+
+    getPhoneNumber(sessionkey, iv, edata) {
         // 确认收获
         let data = {
             "code": sessionkey,
@@ -109,16 +109,10 @@ export default {
         }
         return request("auth/getphone", "POST", data)
     },
-    
+
     getMeMum(data) {
         // 传“我的”页面的四个角标
         return request("api/menum", "GET", data)
     },
-
-    getReminderQR(data) {
-        // 传“我的”页面的四个角标
-        return request("auth/gzhqr", "GET", data)
-    },
-
 
 }

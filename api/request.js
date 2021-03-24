@@ -5,15 +5,15 @@ export default (uri, method, data) => {
     uni.showLoading({
         title: "加载中"
     });
-    
+
     // 一定要放在 export default 内
     let token = uni.getStorageSync('token');
-    
+
     let header = {
         'content-type': 'application/x-www-form-urlencoded',
         token: token
     };
-    
+
 
     return new Promise((resolve, reject) => {
 
@@ -24,7 +24,7 @@ export default (uri, method, data) => {
             data: data,
             success(res) {
                 console.log("请求成功")
-                if(res.statusCode == 401){
+                if (res.statusCode == 401) {
                     console.log("服务端 token 过期")
                     uni.navigateTo({
                         url: "../login/login",

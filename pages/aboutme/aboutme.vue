@@ -7,9 +7,6 @@
                     <rich-text :nodes="toastwindow.content"></rich-text>
                 </view>
             </u-modal>
-            <u-button @click="open">
-                打开模态框
-            </u-button>
         </view>
         <!-- 点击提示 -->
         <!-- <u-modal v-model="toastwindow.show" :content="toastwindow.content"></u-modal> -->
@@ -28,7 +25,6 @@
                 </view>
                 <!-- 个人信息下方四个按钮 -->
                 <view class="order_status">
-
                     <view class="status" v-for="(item,index) in status" :key="index" @click="goPage(item.addr)">
                         <view style="margin: -20rpx 0 0 10rpx;width: 210rpx; height: 20rpx;">
                             <u-badge size="mini" type="error" :count="item.num" :absolute="false"></u-badge>
@@ -85,7 +81,7 @@
                 content: `空山新雨后<br>天气晚来秋`,
                 avatarurl: "",
                 nickname: "您未登录",
-                setting_remind: true,
+                setting_remind: false,
                 toastwindow: {
                     show: false,
                     content: ""
@@ -161,22 +157,21 @@
                 console.log("课表提醒状态：" + e)
                 if (e) {
                     // 此处需要API，成功后显示window
-                    $api.setReminder(true).then((res) => {
+                    $api.setReminder(true).then(res => {
                         if (res.statusCode == 200) {
-
-                            $api.getReminderQR().then(qr => {
-
-                                this.showWindow("开启成功，请继续完成绑定后使用<br><img src='" + qr.data.qrurl +
-                                    "'/>")
-                                this.getReminder()
-
-                            })
-
-
+                            // 已经绑定
+                            this.showWindow("开启提醒成功")
+                        } else if (res.statusCode == 201) {
+                            // 还没绑定
+                            this.showWindow("还差一步，请微信扫码<br>完成绑定后使用<br><img style='width:160px' src='" + res.data
+                                .url +
+                                "'/>")
                         } else {
                             this.showWindow("开启失败，请重试")
-                            this.getReminder()
                         }
+                        setTimeout(() => {
+                            this.getReminder()
+                        }, 500);
                     }).catch((err) => {
                         console.log(err)
                         this.showWindow("开启失败（网络错误）")
@@ -186,11 +181,12 @@
                     $api.setReminder(false).then((res) => {
                         if (res.statusCode == 200) {
                             this.showWindow("课表提醒已关闭")
-                            this.getReminder()
                         } else {
                             this.showWindow("关闭失败，请重试")
-                            this.getReminder()
                         }
+                        setTimeout(() => {
+                            this.getReminder()
+                        }, 500);
                     }).catch((err) => {
                         console.log(err)
                         this.showWindow("关闭失败（网络错误）")
@@ -233,6 +229,12 @@
         font-size: 28rpx;
         color: $u-content-color;
         text-align: center;
+        max-height: 260px;
+    }
+
+    .slot-content img {
+        width: 100px;
+        height: 100px;
     }
 
     .profily,
