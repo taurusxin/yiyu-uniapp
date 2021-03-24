@@ -19,7 +19,7 @@
                 <!-- 个人信息下方四个按钮 -->
                 <view class="order_status">
 
-                    <view class="status" v-for="item in status" @click="goPage(item.addr)">
+                    <view class="status" v-for="(item,index) in status" :key="index" @click="goPage(item.addr)">
                         <view style="margin: -20rpx 0 0 10rpx;width: 210rpx; height: 20rpx;">
                             <u-badge size="mini" type="error" :count="item.num" :absolute="false"></u-badge>
                         </view>
@@ -55,7 +55,7 @@
                                 @click="goPage('/pages/kefu/kefu')"></u-cell-item>
                         </u-cell-group>
                         <u-cell-group>
-                            <u-cell-item icon="info-circle" title="关于我们" :arrow="false" value="v0.1.23 RC1">
+                            <u-cell-item icon="info-circle" title="关于我们" :arrow="false" value="v0.2.23 RC3">
                             </u-cell-item>
                         </u-cell-group>
                     </view>
@@ -71,7 +71,7 @@
     export default {
         data() {
             return {
-                avatarurl: "../../static/fumou-center-template/header.jpg",
+                avatarurl: "",
                 nickname: "您未登录",
                 setting_remind: true,
                 toastwindow: {

@@ -9,12 +9,11 @@
                 <u-input v-model="form.name" />
             </u-form-item>
             
-            <u-form-item label="性别" prop="sex">
+<!--            <u-form-item label="性别" prop="sex">
                 <u-input v-model="form.sex" type="select" @click="show = true" />
                 <u-action-sheet :list="sexSheetList" v-model="show" @click="sexSheetCallback"></u-action-sheet>
-            </u-form-item>
+            </u-form-item> -->
 
-            <!-- 后期有条件改成获取手机号 -->
             <u-form-item label="手机号" prop="phone" label-width="100" :border-bottom="false">
                 <u-input v-model="form.phone" disabled placeholder="点击下方按钮获取手机号" />
             </u-form-item>
