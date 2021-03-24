@@ -3,20 +3,21 @@
         <!-- 引入登录按钮组件 -->
         <!-- <button type="default" @click="goLogin">登录页面测试</button> -->
         <view class="swiper">
-            <u-swiper @tap="goClassDesc" :list="swiper_list" :effect3d="true" height="350" bg-color="#FFFFFF"></u-swiper>
+            <u-swiper @tap="goClassDesc" :list="swiper_list" :effect3d="true" height="350" bg-color="#FFFFFF">
+            </u-swiper>
         </view>
         <u-grid :col="3">
             <u-grid-item @click="goPage('/pages/do_print/do_print')">
                 <image style="width: 100rpx; height: 100rpx;" src="../../static/indexapp/i_print.png"></image>
                 <view class="grid-text">代打印</view>
             </u-grid-item>
-<!--            <u-grid-item @click="goPage('/pages/do_goods/do_goods')">
-                <image style="width: 100rpx; height: 100rpx;" src="../../static/indexapp/i_goods.png"></image>
-                <view class="grid-text">取外卖</view>
-            </u-grid-item> -->
             <u-grid-item @click="goPage('/pages/do_deliver/do_deliver')">
                 <image style="width: 100rpx; height: 100rpx;" src="../../static/indexapp/i_deliver.png"></image>
                 <view class="grid-text">取快递</view>
+            </u-grid-item>
+            <u-grid-item @click="goPage('/pages/do_activity/do_activity')">
+                <image style="width: 100rpx; height: 100rpx;" src="../../static/indexapp/i_activity.png"></image>
+                <view class="grid-text">活动</view>
             </u-grid-item>
             <u-grid-item @click="goClassesTab">
                 <image style="width: 100rpx; height: 100rpx;" src="../../static/indexapp/i_class.png"></image>
@@ -34,7 +35,7 @@
         <view style="margin : 200rpx 0 80rpx 0;">
             <u-divider>溢予，你的大学生活我承包了！</u-divider>
         </view>
-        
+
     </view>
 </template>
 
@@ -69,23 +70,23 @@
         },
         methods: {
             getSwiperData() {
-            	$api.getIndexSwiper().then(
-            		res => {
-            			console.log(res.data)
-            			//获取头图
-            			this.swiper_list = res.data.swiper_list
-            		},
-            	).catch(
-            		err => {}
-            	)
+                $api.getIndexSwiper().then(
+                    res => {
+                        console.log(res.data)
+                        //获取头图
+                        this.swiper_list = res.data.swiper_list
+                    },
+                ).catch(
+                    err => {}
+                )
             },
-            goClassesTab(){
-              uni.switchTab({
-                  url: "/pages/classtable/classtable",
-                  success: res => {},
-                  fail: () => {},
-                  complete: () => {}
-              })  
+            goClassesTab() {
+                uni.switchTab({
+                    url: "/pages/classtable/classtable",
+                    success: res => {},
+                    fail: () => {},
+                    complete: () => {}
+                })
             },
             goPage(e) {
                 console.log("准备跳转地址" + e)
@@ -118,5 +119,4 @@
         margin-top: 4rpx;
         color: $u-type-info;
     }
-
 </style>
