@@ -7,7 +7,7 @@
         <view class="mask" :style="'opacity:' + mask_opacity"></view>
         <view class="title">
             <text>
-                活动标题
+                {{name}}
             </text>
         </view>
         <view class="detail">
@@ -26,16 +26,26 @@
     export default {
         data() {
             return {
-                mask_opacity: 0
+                mask_opacity: 0,
+                name: "第三届吃狗粮大赛",
 
             };
         },
         onPageScroll(e) {
             let scrollTop = e.scrollTop;
-            let nav_temp = (scrollTop - 50) / 180
+            let nav_temp = (scrollTop - 30) / 180
             // console.log(nav_temp)
             if (nav_temp > 0) {
                 this.mask_opacity = nav_temp
+            }
+            if (nav_temp > 0.6) {
+                uni.setNavigationBarTitle({
+                    title: this.name
+                })
+            } else {
+                uni.setNavigationBarTitle({
+                    title: "活动详情"
+                })
             }
         },
 
@@ -98,8 +108,6 @@
         width: 100%;
         min-height: 100vh;
         background-color: #FFFFFF;
-        border-radius: 30rpx 30rpx 0 0;
-
-
+        border-radius: 45rpx 45rpx 0 0;
     }
 </style>
