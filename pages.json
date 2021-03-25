@@ -95,7 +95,7 @@
             "path": "pages/do_activity/do_activity",
             "style": {
                 "navigationBarTitleText": "当前活动",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": true
             }
 
         }, {
@@ -125,35 +125,30 @@
                 "navigationBarTitleText": "打印信息",
                 "enablePullDownRefresh": false
             }
-            
+
         }
 
-        ,{
-            "path" : "pages/me_hd/me_hd",
-            "style" :                                                                                    
-            {
+        , {
+            "path": "pages/me_hd/me_hd",
+            "style": {
                 "navigationBarTitleText": "我的活动",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": true
             }
-            
-        }
-        ,{
-            "path" : "pages/swiper_desc/swiper_desc",
-            "style" :                                                                                    
-            {
+
+        }, {
+            "path": "pages/swiper_desc/swiper_desc",
+            "style": {
                 "navigationBarTitleText": "详情",
                 "enablePullDownRefresh": false
             }
-            
-        }
-        ,{
-            "path" : "pages/do_activity_info/do_activity_info",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
+
+        }, {
+            "path": "pages/do_activity_info/do_activity_info",
+            "style": {
+                "navigationBarTitleText": "活动详情",
                 "enablePullDownRefresh": false
             }
-            
+
         }
     ],
     "globalStyle": {
