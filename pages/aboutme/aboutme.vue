@@ -25,7 +25,7 @@
                 <!-- 个人信息下方四个按钮 -->
                 <view class="order_status">
                     <view class="status" v-for="(item,index) in status" :key="index" @click="goPage(item.addr)">
-                        <view style="margin: -20rpx 0 0 10rpx;width: 210rpx; height: 20rpx;">
+                        <view style="margin: -25rpx 0 0 10rpx;width: 190rpx; height: 20rpx;">
                             <u-badge size="mini" type="error" :count="item.num" :absolute="false"></u-badge>
                         </view>
                         <image class="icon" :src="item.url" mode="aspectFill"></image>

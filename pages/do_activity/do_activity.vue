@@ -1,6 +1,7 @@
 <template>
     <view class="info_content">
-        <u-card v-for="card in cardlist" :title="card.title" :sub-title="card.subTitle">
+        <u-card v-for="(card,index) in cardlist" :key="index" :title="card.title" :sub-title="card.subTitle"
+            @click="goActivityDesc(card.id)">
             <view class="" slot="body">
                 <view class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
                     <view class="u-body-item-title u-line-2">{{card.desc}}</view>
@@ -23,6 +24,7 @@
         data() {
             return {
                 cardlist: [{
+                        id: 0,
                         title: '素胚勾勒出青花，笔锋浓转淡',
                         subTitle: '2020-05-15',
                         desc: '瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半',
@@ -30,6 +32,7 @@
                         people: 30
                     },
                     {
+                        id: 1,
                         title: '素胚勾勒出青花，笔锋浓转淡',
                         subTitle: '2020-05-15',
                         desc: '瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半',
@@ -38,6 +41,17 @@
                     },
                 ]
             };
+        },
+        methods: {
+            goActivityDesc(id) {
+                console.log("准备跳转，将跳转的ID：" + id)
+                uni.navigateTo({
+                    url: '/pages/do_activity_info/do_activity_info?id=' + id,
+                    success: res => {},
+                    fail: () => {},
+                    complete: () => {}
+                });
+            }
         }
     }
 </script>

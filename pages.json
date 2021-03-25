@@ -146,6 +146,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/do_activity_info/do_activity_info",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
     "globalStyle": {
         "navigationBarTextStyle": "black",
