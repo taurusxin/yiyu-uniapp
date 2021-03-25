@@ -11,8 +11,8 @@
             <view class="card_foot" slot="foot">
                 <u-icon name="man-add" size="34" color="" :label="card.people + ' 报名'"></u-icon>
                 <view>
-                    <u-tag text="已报名" type="success" />
-                    <u-tag text="未报名" type="info" />
+                    <u-tag v-if="card.join" text="已报名" type="success" />
+                    <u-tag v-else text="未报名" type="info" />
                 </view>
             </view>
         </u-card>
@@ -29,7 +29,8 @@
                         subTitle: '2020-05-15',
                         desc: '瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半',
                         img: 'https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg',
-                        people: 30
+                        people: 30,
+                        join: true
                     },
                     {
                         id: 1,
@@ -37,7 +38,8 @@
                         subTitle: '2020-05-15',
                         desc: '瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半',
                         img: 'https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg',
-                        people: 20
+                        people: 20,
+                        join: false
                     },
                 ]
             };
