@@ -3,7 +3,8 @@
         <!-- 引入登录按钮组件 -->
         <!-- <button type="default" @click="goLogin">登录页面测试</button> -->
         <view class="swiper">
-            <u-swiper @click="goPicDesc" :list="swiper_list" :effect3d="true" height="350" bg-color="#FFFFFF">
+            <u-swiper @click="goPicDesc" :list="swiper_list" :title="false" :effect3d="true" height="350"
+                bg-color="#FFFFFF">
             </u-swiper>
         </view>
         <u-grid :col="3">
@@ -45,8 +46,7 @@
     export default {
         data() {
             return {
-                // 后期要删掉这里的数据
-                swiper_list: [],
+                swiper_list: []
             }
         },
         onLoad() {
@@ -59,13 +59,27 @@
         methods: {
             goPicDesc(index) {
                 let id = this.swiper_list[index].id
-                console.log("点击轮播图的序号 " + index + " ID为 " + id)
-                uni.navigateTo({
-                    url: '../swiper_desc/swiper_desc?' + `id=${id}`,
-                    success: res => {},
-                    fail: () => {},
-                    complete: () => {}
-                });
+                let src = this.swiper_list[index].src
+                let type = this.swiper_list[index].type
+                if (type == "web") {
+                    console.log("前往webview，点击轮播图的序号 " + index + " ID为 " + id)
+                    uni.navigateTo({
+                        url: '/pages/swiper_desc/swiper_desc?' + `id=${id}` + `&src=${src}`,
+                        success: res => {},
+                        fail: () => {},
+                        complete: () => {}
+                    });
+                } else {
+                    console.log("前往活动详情，点击轮播图的序号 " + index + " ID为 " + id)
+                    uni.navigateTo({
+                        url: '/pages/do_activity_info/do_activity_info?' + `id=${id}`,
+                        success: res => {},
+                        fail: () => {},
+                        complete: () => {}
+                    });
+                }
+
+
             },
             getSwiperData() {
                 $api.getIndexSwiper().then(
@@ -73,24 +87,30 @@
                         console.log(res.data)
                         //获取头图
                         this.swiper_list = res.data.swiper_list
-                        // TODO 当API固定后删除下方
+                        // TODO 后期要删掉这里的数据
                         this.swiper_list = [{
-                                id: 1,
-                                image: 'https://cdn.uviewui.com/uview/swiper/1.jpg',
-                                title: '昨夜星辰昨夜风，画楼西畔桂堂东'
+                                id: 1, //轮播ID
+                                image: 'https://cdn.uviewui.com/uview/swiper/1.jpg',    //轮播图片
+                                src: "https://www.everdo.cn",   //webview网址
+                                type: "web",    //跳转webview还是活动页面
+                                activity: 1,    //活动ID
                             },
                             {
                                 id: 2,
                                 image: 'https://cdn.uviewui.com/uview/swiper/2.jpg',
-                                title: '身无彩凤双飞翼，心有灵犀一点通'
+                                src: "https://www.everdo.cn",
+                                type: "activity",
+                                activity: 1,
                             },
                             {
                                 id: 3,
                                 image: 'https://cdn.uviewui.com/uview/swiper/3.jpg',
-                                title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
+                                src: "https://www.everdo.cn",
+                                type: "web",
+                                activity: 1,
                             }
                         ]
-                        // TODO 当API固定后删除上方
+                        // TODO 后期要删掉上面的数据
                     },
                 ).catch(
                     err => {}

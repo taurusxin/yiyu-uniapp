@@ -1,17 +1,17 @@
 <template>
-	<view>
-		
-	</view>
+    <view>
+        <web-view :webview-styles="webviewStyles" :src="src"></web-view>
+    </view>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				
-			};
-		}
-	}
+    export default {
+        data() {
+            return {
+                src: "https://www.everdo.cn/",
+            };
+        }
+    }
 </script>
 
 <style lang="scss">

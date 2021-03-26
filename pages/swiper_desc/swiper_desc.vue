@@ -1,21 +1,23 @@
 <template>
-	<view>
-		
-	</view>
+    <view>
+        <web-view :webview-styles="webviewStyles" :src="src"></web-view>
+    </view>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				
-			};
-		},
+    export default {
+        data() {
+            return {
+                src: "",
+            };
+        },
         onLoad(e) {
             let id = e.id
-            console.log(id)
+            let src = e.src
+            console.log(id, src)
+            this.src = src
         }
-	}
+    }
 </script>
 
 <style lang="scss">

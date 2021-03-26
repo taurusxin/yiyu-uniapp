@@ -14,7 +14,7 @@
                 </view>
             </view>
             <view>
-                <text>123456</text>
+                <text>{{code}}</text>
             </view>
             <View class="button">
                 <u-button type="error" plain :ripple="true">取消报名</u-button>
@@ -28,11 +28,13 @@
     export default {
         data() {
             return {
-
+                id: null,
+                code: "123456"
             };
         },
         onLoad(id) {
             console.log("报名信息页面收到的ID为：", id)
+            this.id = id
         }
     }
 </script>
@@ -70,9 +72,9 @@
             justify-content: center;
             flex-direction: column;
             text-align: center;
-            
+
             font-size: 40rpx;
-            font-weight: 600;
+            font-weight: 650;
 
             .text {
                 height: 90rpx;
