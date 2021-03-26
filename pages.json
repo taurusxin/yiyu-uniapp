@@ -150,6 +150,15 @@
             }
 
         }
+        ,{
+            "path" : "pages/activity_join/activity_join",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "报名信息",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
     "globalStyle": {
         "navigationBarTextStyle": "black",

@@ -1,0 +1,91 @@
+<template>
+    <view class="content">
+        <view class="success">
+            <u-image width="160rpx" height="160rpx" src="@/static/success.png" shape="circle" mode="aspectFit">
+            </u-image>
+        </view>
+        <view class="info">
+            <view>
+                <view class="text">
+                    <text>您已经成功报名</text>
+                </view>
+                <view class="text">
+                    <text>请凭活动码参加活动</text>
+                </view>
+            </view>
+            <view>
+                <text>123456</text>
+            </view>
+            <View class="button">
+                <u-button type="error" plain :ripple="true">取消报名</u-button>
+            </View>
+        </view>
+
+    </view>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+
+            };
+        },
+        onLoad(id) {
+            console.log("报名信息页面收到的ID为：", id)
+        }
+    }
+</script>
+
+<style lang="scss" scoped>
+    page {
+        height: 100%;
+        // 支付宝小程序,钉钉小程序需添加绝对定位,否则height:100%失效: https://opendocs.alipay.com/mini/framework/acss#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98
+        /* #ifdef MP-ALIPAY || MP-DINGTALK*/
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        /* #endif */
+    }
+
+    .content {
+        width: 100%;
+        height: 100%;
+
+        .success {
+            width: 100%;
+            height: 280rpx;
+            margin: 200rpx 0 100rpx 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info {
+            width: 100%;
+            height: 300rpx;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            
+            font-size: 40rpx;
+            font-weight: 600;
+
+            .text {
+                height: 90rpx;
+                font-size: 40rpx;
+                font-weight: 550;
+            }
+        }
+
+        .button {
+            width: 300rpx;
+            height: 80rpx;
+            margin: 100rpx 0 100rpx 0;
+        }
+
+    }
+</style>

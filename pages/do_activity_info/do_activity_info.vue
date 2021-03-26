@@ -32,7 +32,8 @@
         <view class="tab">
             <view class="tab-join">
                 <u-button v-if="!passage.joined" style="width: 100%;" shape="circle" type="primary">立刻报名</u-button>
-                <u-button v-else style="width: 100%;" shape="circle" type="success">已报名，查看详情</u-button>
+                <u-button v-else style="width: 100%;" shape="circle" type="success" @click="goActivityJoin">已报名，查看详情
+                </u-button>
             </view>
         </view>
     </view>
@@ -49,7 +50,7 @@
                 id: null,
                 // 以下数据从后端接收
                 passage: {
-                    joined: false,
+                    joined: true,
                     img: "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3361641725,2908210208&fm=26&gp=0.jpg",
                     time: "2020 年 3 月 25 日",
                     name: "第三届吃狗粮大赛",
@@ -93,6 +94,16 @@
         onLoad(id) {
             console.log("跳转后页面取得的ID为：", id)
             this.id = id
+        },
+        methods: {
+            goActivityJoin() {
+                uni.navigateTo({
+                    url: '/pages/activity_join/activity_join?id=' + this.id,
+                    success: res => {},
+                    fail: () => {},
+                    complete: () => {}
+                });
+            }
         }
     }
 </script>
