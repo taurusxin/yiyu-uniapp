@@ -1,28 +1,30 @@
 <template>
     <view class="content">
         <view class="image">
-            <u-image width="100%" height="400rpx" :src="img" mode="aspectFill"></u-image>
+            <u-image width="100%" height="400rpx" :src="passage.img" mode="aspectFill"></u-image>
         </view>
         <view class="mask" :style="'opacity:' + mask_opacity"></view>
         <view class="title">
             <text>
-                {{name}}
+                {{passage.name}}
             </text>
         </view>
         <view class="detail">
             <view class="time">
-                <u-icon name="clock-fill" style="margin-right: 20rpx;"></u-icon> {{time}}
+                <u-icon name="clock-fill" style="margin-right: 20rpx;"></u-icon> {{passage.time}}
             </view>
             <u-divider half-width="100%" margin-top="25" :use-slot="false"></u-divider>
-            <view class="desc">{{desc}}</view>
-            <view class="step">
-                <timeline :timeline="timeline"></timeline>
+            <view class="desc" v-if="passage.desc.length > 0">{{passage.desc}}</view>
+            <view class="main">
+                <timeline :timeline="passage.timeline" v-if="passage.timeline.length > 0"></timeline>
             </view>
-
-<!--            <view class="card1" style="height: 2000rpx; width: 100%; background-color: #0081FF;margin-top: 50rpx;">
+            <view class="main">
+                <u-image width="100%" :src="passage.pra_img" mode="widthFix" v-if="passage.pra_img.length > 0"></u-image>
             </view>
-            <view class="card1" style="height: 2000rpx; width: 100%; background-color: #95ff53;margin-top: 50rpx;">
-            </view> -->
+            <view class="main">
+                <u-parse :html="passage.rich_text" :tag-style="rich_style" :selectable="true" v-if="passage.rich_text.length > 0">
+                </u-parse>
+            </view>
         </view>
 
     </view>
@@ -33,23 +35,31 @@
         data() {
             return {
                 mask_opacity: 0,
-                img: "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3361641725,2908210208&fm=26&gp=0.jpg",
-                time: "2020 年 3 月 25 日",
-                name: "第三届吃狗粮大赛",
-                desc: "小王总说是加夜班，其实就是和朋友去喝酒喝到天亮，最后还是我向小王支招，这新媳妇就该弄个下马威，不能纵容，就该揍，揍到服了！小王一听有理，回去就找他媳妇理论，被他媳妇狠狠揍了一顿，过了几天，小王对我说：哥，你这方法真牛！媳妇把我治服了，媳妇还说以后不能和你这种人来往，拜拜。",
-                timeline: [{
-                        "desc": "见一见大名鼎鼎的杜嘉诚老师",
-                        "time": "与杜嘉诚老师见面"
-                    },
-                    {
-                        "desc": "学会软件设计",
-                        "time": "学会常用的UI设计软件"
-                    },
-                    {
-                        "desc": "咕咕咕",
-                        "time": "哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"
-                    }
-                ],
+                rich_style: {
+                    p: "margin: 0 0 25rpx 0;font-size: 27rpx; line-height: 38rpx; letter-spacing: 4rpx; text-align: justify; color: #505050;"
+                },
+                // 以下数据从后端接收
+                passage: {
+                    img: "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3361641725,2908210208&fm=26&gp=0.jpg",
+                    time: "2020 年 3 月 25 日",
+                    name: "第三届吃狗粮大赛",
+                    desc: "小王总说是加夜班，其实就是和朋友去喝酒喝到天亮，最后还是我向小王支招，这新媳妇就该弄个下马威，不能纵容，就该揍，揍到服了！小王一听有理，回去就找他媳妇理论，被他媳妇狠狠揍了一顿，过了几天，小王对我说：哥，你这方法真牛！媳妇把我治服了，媳妇还说以后不能和你这种人来往，拜拜。",
+                    timeline: [{
+                            "desc": "先吃一大碗狗粮",
+                            "time": "早上 8:30"
+                        },
+                        {
+                            "desc": "再继续吃点狗粮",
+                            "time": "中午 12:30"
+                        },
+                        {
+                            "desc": "还是得吃狗粮",
+                            "time": "下午 16:30"
+                        }
+                    ],
+                    pra_img: "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2757208942,3180606379&fm=26&gp=0.jpg",
+                    rich_text: "空中有一只年轻的蚊子，蜘蛛看见了说：“帅哥儿，到我的家里来歇歇脚吧。” 蚊子说：“你那里有什么好玩的吗?” 蜘蛛说：“有啊，我开了一个网吧，请您来上网!”蚊子听后，一头扎了过去。 呵呵，新年快乐!"
+                }
             };
         },
         onPageScroll(e) {
@@ -148,7 +158,7 @@
             // text-align-last: justify;
         }
 
-        .step {
+        .main {
             width: 100%;
             padding: 0 30rpx 0 30rpx;
             margin: 0rpx 0rpx 40rpx 0rpx;
