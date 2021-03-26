@@ -16,7 +16,7 @@
 				</view>
 			</template>
 		</u-time-line-item>
-		<u-time-line-item v-for="item of timeline">
+		<u-time-line-item v-for="(item,index) of timeline" :key="index">
 			<!-- 此处没有自定义左边的内容，会默认显示一个点 -->
 			<template v-slot:content>
 				<view>

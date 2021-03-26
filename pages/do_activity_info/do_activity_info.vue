@@ -19,14 +19,22 @@
                 <timeline :timeline="passage.timeline" v-if="passage.timeline.length > 0"></timeline>
             </view>
             <view class="main">
-                <u-image width="100%" :src="passage.pra_img" mode="widthFix" v-if="passage.pra_img.length > 0"></u-image>
+                <u-image width="100%" :src="passage.pra_img" mode="widthFix" v-if="passage.pra_img.length > 0">
+                </u-image>
             </view>
             <view class="main">
-                <u-parse :html="passage.rich_text" :tag-style="rich_style" :selectable="true" v-if="passage.rich_text.length > 0">
+                <u-parse :html="passage.rich_text" :tag-style="rich_style" :selectable="true"
+                    v-if="passage.rich_text.length > 0">
                 </u-parse>
+                <view style="width: 100%; height: 85rpx;"></view>
             </view>
         </view>
-
+        <view class="tab">
+            <view class="tab-join">
+                <u-button v-if="!passage.joined" style="width: 100%;" shape="circle" type="primary">立刻报名</u-button>
+                <u-button v-else style="width: 100%;" shape="circle" type="success">已报名，查看详情</u-button>
+            </view>
+        </view>
     </view>
 </template>
 
@@ -38,8 +46,10 @@
                 rich_style: {
                     p: "margin: 0 0 25rpx 0;font-size: 27rpx; line-height: 38rpx; letter-spacing: 4rpx; text-align: justify; color: #505050;"
                 },
+                id: null,
                 // 以下数据从后端接收
                 passage: {
+                    joined: false,
                     img: "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3361641725,2908210208&fm=26&gp=0.jpg",
                     time: "2020 年 3 月 25 日",
                     name: "第三届吃狗粮大赛",
@@ -82,6 +92,7 @@
 
         onLoad(id) {
             console.log("跳转后页面取得的ID为：", id)
+            this.id = id
         }
     }
 </script>
@@ -163,5 +174,39 @@
             padding: 0 30rpx 0 30rpx;
             margin: 0rpx 0rpx 40rpx 0rpx;
         }
+    }
+
+    .tab {
+        box-shadow: 0px -0.5px 5px #E4E7ED;
+        padding: 0 20rpx 0 20rpx;
+        z-index: 1;
+        height: 60px;
+        width: 100%;
+        line-height: 60rpx;
+        position: fixed;
+        align-items: center;
+        justify-content: center;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        background-color: #FFFFFF;
+
+
+        .tab-join {
+            justify-content: center;
+            text-align: center;
+            color: #333333;
+            width: 96%;
+            height: 50px;
+            line-height: 50rpx;
+            // background-color: #505050;
+            // margin: 15rpx;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-direction: row;
+            flex-direction: row;
+            align-items: center;
+        }
+
     }
 </style>

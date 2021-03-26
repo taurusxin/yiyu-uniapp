@@ -16,6 +16,19 @@
                 </view>
             </view>
         </u-card>
+        <view v-if="cardlist.length === 0" style="height: calc(100vh - 60rpx);display: flex;justify-content: center;">
+            <view style="display: flex;justify-content: center;flex-direction: column;">
+                <view style="margin-top: -150rpx;">
+                    <image src="../../static/empty.png" style="width: 100px; height: 80px;"></image>
+                </view>
+                <view style="margin-top: 30rpx; text-align: center;">
+                    <text>
+                        这里什么都没有
+                    </text>
+                </view>
+            </view>
+        </view>
+        <view v-else style="height: 50px;"></view>
     </view>
 </template>
 
