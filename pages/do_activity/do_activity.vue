@@ -40,7 +40,7 @@
                 cardlist: []
             };
         },
-        onLoad() {
+        onShow() {
             this.getActList()
         },
         methods: {

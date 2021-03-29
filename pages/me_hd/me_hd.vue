@@ -1,7 +1,7 @@
 <template>
     <view class="info_content">
-        <u-card v-for="(card,index) in cardlist" :key="index" :title="card.title" :sub-title="card.subTitle" :thumb="card.img"
-            @click="goActivityDesc(card.id)">
+        <u-card v-for="(card,index) in cardlist" :key="index" :title="card.title" :sub-title="card.subTitle"
+            :thumb="card.img" @click="goActivityDesc(card.id)">
             <view class="" slot="body">
                 <view class="u-body-item u-flex u-col-between u-p-t-0">
                     <view class="u-body-item-title u-line-2">活动码：{{card.code}}</view>
@@ -36,54 +36,65 @@
     export default {
         data() {
             return {
-                cardlist: [{
-                        id: 0,
-                        title: '素胚勾勒出青花，笔锋浓转淡',
-                        subTitle: '2020-05-15',
-                        code: "123456",
-                        desc: '瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半',
-                        img: 'https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg',
-                        people: 30,
-                        join: true
-                    },
-                    {
-                        id: 1,
-                        title: '素胚勾勒出青花，笔锋浓转淡',
-                        subTitle: '2020-05-15',
-                        code: "123456",
-                        desc: '瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半',
-                        img: 'https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg',
-                        people: 20,
-                        join: false
-                    },
-                    {
-                        id: 3,
-                        title: '素胚勾勒出青花，笔锋浓转淡',
-                        subTitle: '2020-05-15',
-                        code: "123456",
-                        desc: '瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半',
-                        img: 'https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg',
-                        people: 20,
-                        join: false
-                    },
-                    {
-                        id: 4,
-                        title: '素胚勾勒出青花，笔锋浓转淡',
-                        subTitle: '2020-05-15',
-                        code: "123456",
-                        desc: '瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半',
-                        img: 'https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg',
-                        people: 20,
-                        join: false
-                    },
-                ]
+                cardlist: []
             };
         },
+        onShow() {
+          this.getActList()  
+        },
         methods: {
+            getActList() {
+                $api.getActList("me").then(res => {
+                    this.cardlist = res.data.cardlist
+
+                    // TODO api完成后移除下面
+                    this.cardlist = [{
+                            id: 0,
+                            title: '素胚勾勒出青花，笔锋浓转淡',
+                            subTitle: '2020-05-15',
+                            desc: '瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半',
+                            img: 'https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg',
+                            people: 30,
+                            join: true
+                        },
+                        {
+                            id: 1,
+                            title: '素胚勾勒出青花，笔锋浓转淡',
+                            subTitle: '2020-05-15',
+                            desc: '瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半',
+                            img: 'https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg',
+                            people: 20,
+                            join: false
+                        },
+                        {
+                            id: 3,
+                            title: '素胚勾勒出青花，笔锋浓转淡',
+                            subTitle: '2020-05-15',
+                            desc: '瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半',
+                            img: 'https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg',
+                            people: 20,
+                            join: false
+                        },
+                        {
+                            id: 4,
+                            title: '素胚勾勒出青花，笔锋浓转淡',
+                            subTitle: '2020-05-15',
+                            desc: '瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半',
+                            img: 'https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg',
+                            people: 20,
+                            join: false
+                        },
+                    ]
+                    // TODO api完成后移除上面
+
+                }).catch(e => {
+                    console.log(e)
+                })
+            },
             goActivityDesc(id) {
                 console.log("准备跳转，将跳转的ID：" + id)
                 uni.navigateTo({
-                    url: '/pages/activity_join/activity_join?id=' + id,
+                    url: '/pages/do_activity_info/do_activity_info?id=' + id,
                     success: res => {},
                     fail: () => {},
                     complete: () => {}
@@ -115,7 +126,6 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-
         }
 
     }
