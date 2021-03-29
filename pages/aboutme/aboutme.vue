@@ -54,16 +54,21 @@
                                 @click="goPage('/pages/setting_addr/setting_addr')"></u-cell-item>
                         </u-cell-group>
                     </view>
-                    <view style="margin-top: 20rpx;">
+                    <view style="margin-top: 30rpx;">
+                        <u-cell-group>
+                            <u-cell-item icon="attach" title="我的 UID" :arrow="false" :value="uid">
+                            </u-cell-item>
+                        </u-cell-group>
                         <u-cell-group>
                             <u-cell-item icon="kefu-ermai" title="人工客服" :arrow="true"
                                 @click="goPage('/pages/kefu/kefu')"></u-cell-item>
                         </u-cell-group>
                         <u-cell-group>
-                            <u-cell-item icon="info-circle" title="关于我们" :arrow="false" value="v0.2.23 RC3">
+                            <u-cell-item icon="info-circle" title="关于我们" :arrow="false" value="v0.5.01 beta">
                             </u-cell-item>
                         </u-cell-group>
                     </view>
+                    <view style="height: 150rpx;"></view>
                 </view>
             </view>
         </view>
@@ -76,6 +81,7 @@
     export default {
         data() {
             return {
+                uid: null,
                 show: false,
                 content: `空山新雨后<br>天气晚来秋`,
                 avatarurl: "",
@@ -132,6 +138,7 @@
                     for (let i = 0; i < num.length; i++) {
                         this.status[i].num = num[i]
                     }
+                    this.uid = res.data.uid
                 })
             },
             getReminder() {

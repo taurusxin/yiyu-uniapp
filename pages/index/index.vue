@@ -78,8 +78,6 @@
                         complete: () => {}
                     });
                 }
-
-
             },
             getSwiperData() {
                 $api.getIndexSwiper().then(
