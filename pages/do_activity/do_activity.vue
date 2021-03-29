@@ -41,7 +41,6 @@
                         id: 0,
                         title: '素胚勾勒出青花，笔锋浓转淡',
                         subTitle: '2020-05-15',
-                        code: "123456",
                         desc: '瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半',
                         img: 'https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg',
                         people: 30,
@@ -51,7 +50,6 @@
                         id: 1,
                         title: '素胚勾勒出青花，笔锋浓转淡',
                         subTitle: '2020-05-15',
-                        code: "123456",
                         desc: '瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半',
                         img: 'https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg',
                         people: 20,
@@ -61,7 +59,6 @@
                         id: 3,
                         title: '素胚勾勒出青花，笔锋浓转淡',
                         subTitle: '2020-05-15',
-                        code: "123456",
                         desc: '瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半',
                         img: 'https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg',
                         people: 20,
@@ -71,7 +68,6 @@
                         id: 4,
                         title: '素胚勾勒出青花，笔锋浓转淡',
                         subTitle: '2020-05-15',
-                        code: "123456",
                         desc: '瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半',
                         img: 'https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg',
                         people: 20,
@@ -81,13 +77,13 @@
             };
         },
         onLoad() {
-          this.getActList()  
+            this.getActList()
         },
         methods: {
-            getActList(){
-                $api.getActList().then(res=>{
+            getActList() {
+                $api.getActList("all").then(res => {
                     this.cardlist = res.data.cardlist
-                }).catch(e=>{
+                }).catch(e => {
                     console.log(e)
                 })
             },

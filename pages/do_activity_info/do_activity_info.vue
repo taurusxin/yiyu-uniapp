@@ -96,6 +96,9 @@
             this.id = id
         },
         methods: {
+            getActivityById(){
+                
+            },
             goActivityJoin() {
                 uni.navigateTo({
                     url: '/pages/activity_join/activity_join?id=' + this.id,

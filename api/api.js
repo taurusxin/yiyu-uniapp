@@ -115,8 +115,11 @@ export default {
         return request("api/menum", "GET", data)
     },
 
-    getActList(data) {
-        // 传“我的”页面的四个角标
+    getActList(type) {
+        // 全部活动列表
+        let data = {
+            "type": type
+        }
         return request("api/actlist", "GET", data)
     },
 }
