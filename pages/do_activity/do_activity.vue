@@ -33,6 +33,7 @@
 </template>
 
 <script>
+    import $api from "../../api/api.js"
     export default {
         data() {
             return {
@@ -79,7 +80,17 @@
                 ]
             };
         },
+        onLoad() {
+          this.getActList()  
+        },
         methods: {
+            getActList(){
+                $api.getActList().then(res=>{
+                    this.cardlist = res.data.cardlist
+                }).catch(e=>{
+                    console.log(e)
+                })
+            },
             goActivityDesc(id) {
                 console.log("准备跳转，将跳转的ID：" + id)
                 uni.navigateTo({

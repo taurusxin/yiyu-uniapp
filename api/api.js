@@ -115,4 +115,8 @@ export default {
         return request("api/menum", "GET", data)
     },
 
+    getActList(data) {
+        // 传“我的”页面的四个角标
+        return request("api/actlist", "GET", data)
+    },
 }
