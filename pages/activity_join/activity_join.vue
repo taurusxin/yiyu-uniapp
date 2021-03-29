@@ -1,5 +1,6 @@
 <template>
     <view class="content">
+        <u-modal v-model="toastwindow.show" :content="toastwindow.content" @confirm="confirm"></u-modal>
         <view class="success">
             <u-image width="160rpx" height="160rpx" src="@/static/success.png" shape="circle" mode="aspectFit">
             </u-image>
@@ -17,25 +18,53 @@
                 <text>{{code}}</text>
             </view>
             <View class="button">
-                <u-button type="error" plain :ripple="true">取消报名</u-button>
+                <u-button type="error" plain :ripple="true" @click="cancleJoin">取消报名</u-button>
             </View>
         </view>
-
     </view>
 </template>
 
 <script>
+    import $api from "../../api/api.js"
     export default {
         data() {
             return {
                 id: null,
-                code: ""
+                code: "",
+                toastwindow: {
+                    show: false,
+                    content: ""
+                }
             };
         },
         onLoad(e) {
             console.log("报名信息页面收到的ID为：", e)
             this.id = e.id
             this.code = e.code
+        },
+        methods: {
+            confirm(){
+                this.toastwindow.show = false
+                uni.navigateBack();
+            },
+            showWindow(content) {
+                this.toastwindow.show = true,
+                    this.toastwindow.content = content
+            },
+            cancleJoin() {
+                $api.setJoinActivity(this.id, "remove").then(res => {
+                    if (res.statusCode == 200) {
+                        // 已经绑定
+                        this.showWindow("取消报名成功！")
+                        
+                    } else {
+                        this.showWindow("取消报名失败。" + res.data.errMsg)
+                    }
+                }).catch(e => {
+                    this.showWindow("取消报名失败。" + e)
+                    console.log(e)
+                })
+            }
         }
     }
 </script>

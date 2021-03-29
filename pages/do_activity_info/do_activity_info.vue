@@ -1,6 +1,6 @@
 <template>
     <view class="content">
-       <u-modal v-model="toastwindow.show" :content="toastwindow.content"></u-modal>
+        <u-modal v-model="toastwindow.show" :content="toastwindow.content"></u-modal>
         <view class="image">
             <u-image width="100%" height="400rpx" :src="passage.img" mode="aspectFill"></u-image>
         </view>
@@ -32,7 +32,8 @@
         </view>
         <view class="tab">
             <view class="tab-join">
-                <u-button v-if="!passage.joined" style="width: 100%;" shape="circle" type="primary" @click="doJoin">立刻报名</u-button>
+                <u-button v-if="!passage.joined" style="width: 100%;" shape="circle" type="primary" @click="doJoin">立刻报名
+                </u-button>
                 <u-button v-else style="width: 100%;" shape="circle" type="success" @click="goActivityJoin">已报名，查看详情
                 </u-button>
             </view>
@@ -79,6 +80,8 @@
         onLoad(e) {
             console.log("跳转后页面取得的ID为：", e.id)
             this.id = e.id
+        },
+        onShow() {
             this.getActivityById(this.id)
         },
         methods: {
@@ -120,15 +123,15 @@
                 this.toastwindow.show = true,
                     this.toastwindow.content = content
             },
-            doJoin(){
-                $api.setJoinActivity(this.id,"add").then(res=>{
+            doJoin() {
+                $api.setJoinActivity(this.id, "add").then(res => {
                     if (res.statusCode == 200) {
                         // 已经绑定
                         this.showWindow("报名成功！")
-                    }  else {
+                    } else {
                         this.showWindow("报名失败。" + res.data.errMsg)
                     }
-                }).catch(e=>{
+                }).catch(e => {
                     this.showWindow("报名失败。" + e)
                     console.log(e)
                 })

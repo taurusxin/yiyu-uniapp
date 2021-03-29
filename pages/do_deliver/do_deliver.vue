@@ -1,10 +1,11 @@
 <template>
     <view class="content">
-        <u-modal v-model="personinfowindow.show" :content="personinfowindow.content" @confirm="confirmFillInfo" @cancel="cancelFillInfo"
-            show-cancel-button>
+        <u-modal v-model="personinfowindow.show" :content="personinfowindow.content" @confirm="confirmFillInfo"
+            @cancel="cancelFillInfo" show-cancel-button>
         </u-modal>
         <!-- 点击提示 -->
-        <u-modal v-model="toastwindow.show" :content="toastwindow.content" :async-close="true" @confirm="confirmDoDeliver">
+        <u-modal v-model="toastwindow.show" :content="toastwindow.content" :async-close="true"
+            @confirm="confirmDoDeliver">
         </u-modal>
         <!-- 点击提示结束 -->
         <u-form :model="form" ref="uForm">
