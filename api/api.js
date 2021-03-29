@@ -122,11 +122,19 @@ export default {
         }
         return request("api/actlist", "GET", data)
     },
-    
-    getActById(id){
+
+    getActById(id) {
         let data = {
             "id": id
         }
         return request("api/actbyid", "GET", data)
+    },
+
+    setJoinActivity(id, type) {
+        let data = {
+            "id": id,
+            "type": type
+        }
+        return request("auth/actjoin", "POST", data)
     }
 }

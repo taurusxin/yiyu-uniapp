@@ -1,5 +1,6 @@
 <template>
     <view class="content">
+       <u-modal v-model="toastwindow.show" :content="toastwindow.content"></u-modal>
         <view class="image">
             <u-image width="100%" height="400rpx" :src="passage.img" mode="aspectFill"></u-image>
         </view>
@@ -31,7 +32,7 @@
         </view>
         <view class="tab">
             <view class="tab-join">
-                <u-button v-if="!passage.joined" style="width: 100%;" shape="circle" type="primary">立刻报名</u-button>
+                <u-button v-if="!passage.joined" style="width: 100%;" shape="circle" type="primary" @click="doJoin">立刻报名</u-button>
                 <u-button v-else style="width: 100%;" shape="circle" type="success" @click="goActivityJoin">已报名，查看详情
                 </u-button>
             </view>
@@ -44,6 +45,10 @@
     export default {
         data() {
             return {
+                toastwindow: {
+                    show: false,
+                    content: ""
+                },
                 mask_opacity: 0,
                 rich_style: {
                     p: "margin: 0 0 25rpx 0;font-size: 27rpx; line-height: 38rpx; letter-spacing: 4rpx; text-align: justify; color: #505050;"
@@ -108,6 +113,23 @@
                     // TODO api完成后移除上面
 
                 }).catch(e => {
+                    console.log(e)
+                })
+            },
+            showWindow(content) {
+                this.toastwindow.show = true,
+                    this.toastwindow.content = content
+            },
+            doJoin(){
+                $api.setJoinActivity(this.id,"add").then(res=>{
+                    if (res.statusCode == 200) {
+                        // 已经绑定
+                        this.showWindow("报名成功！")
+                    }  else {
+                        this.showWindow("报名失败。" + res.data.errMsg)
+                    }
+                }).catch(e=>{
+                    this.showWindow("报名失败。" + e)
                     console.log(e)
                 })
             },
