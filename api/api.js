@@ -122,4 +122,11 @@ export default {
         }
         return request("api/actlist", "GET", data)
     },
+    
+    getActById(id){
+        let data = {
+            "id": id
+        }
+        return request("api/actbyid", "GET", data)
+    }
 }

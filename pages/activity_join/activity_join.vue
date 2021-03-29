@@ -29,12 +29,13 @@
         data() {
             return {
                 id: null,
-                code: "123456"
+                code: ""
             };
         },
-        onLoad(id) {
-            console.log("报名信息页面收到的ID为：", id)
-            this.id = id
+        onLoad(e) {
+            console.log("报名信息页面收到的ID为：", e)
+            this.id = e.id
+            this.code = e.code
         }
     }
 </script>
