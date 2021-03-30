@@ -8,7 +8,7 @@
     export default {
         data() {
             return {
-                src: "https://www.everdo.cn/",
+                src: "https://yiyv.blog.client.everdo.cn/about",
             };
         }
     }
