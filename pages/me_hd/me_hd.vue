@@ -33,6 +33,7 @@
 </template>
 
 <script>
+    import $api from "../../api/api.js"
     export default {
         data() {
             return {
