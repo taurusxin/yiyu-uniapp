@@ -6,7 +6,7 @@
         <!-- 点击提示结束 -->
         <u-form :model="form" ref="uForm">
             <u-form-item label="选择学校 / 简称" prop="school" label-width="250">
-                <u-input v-model="form.school" type="select" @click="show = true" />
+                <u-input v-model="school" type="select" @click="show = true" />
                 <u-action-sheet :list="schoolSheetList" v-model="show" @click="schoolSheetCallback"></u-action-sheet>
             </u-form-item>
             <u-form-item label="输入学号" prop="snumber" label-width="150">
@@ -35,6 +35,7 @@
                     show: false,
                     content: ""
                 },
+                school: "",
                 form: {
                     school: '',
                     snumber: '',
@@ -66,10 +67,7 @@
                         text: '华南农业大学珠江学院'
                     },
                     {
-                        text: '北京大学'
-                    },
-                    {
-                        text: '清华大学'
+                        text: '云南师范大学商学院'
                     }
                 ],
             };
@@ -113,8 +111,13 @@
             schoolSheetCallback(index) {
                 // this.form.school = this.schoolSheetList[index].text;
                 if (index == 0) {
+                    this.school = "华南农业大学珠江学院"
                     this.form.school = "scauzj"
+                } else if (index == 1) {
+                    this.school = "云南师范大学商学院"
+                    this.form.school = "ynnubs"
                 } else {
+                    this.school = "其他"
                     this.form.school = "others"
                 }
                 console.log("已选择的学校为：" + this.form.school)
@@ -131,6 +134,13 @@
                 if (res.statusCode == 200) {
                     this.form = res.data.form
                     // 说明用户之前绑定过教务系统
+                    if (this.form.school == "scauzj") {
+                        this.school = "华南农业大学珠江学院"
+                    } else if (this.form.school == "ynnubs") {
+                        this.school = "云南师范大学商学院"
+                    } else {
+                        this.school = "其他"
+                    }
                     this.binded = true
                 } else {
                     console.log("状态码不为200，用户之前还没绑定")
