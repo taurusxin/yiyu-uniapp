@@ -43,6 +43,15 @@
         onShow() {
             this.getActList()
         },
+        onPullDownRefresh() {
+            this.getActList()
+            this.$nextTick(function() {
+                setTimeout(function() {
+                    // 不加这个方法真机下拉会一直处于刷新状态，无法复位
+                    uni.stopPullDownRefresh();
+                }, 300)
+            })
+        },
         methods: {
             getActList() {
                 $api.getActList("all").then(res => {
