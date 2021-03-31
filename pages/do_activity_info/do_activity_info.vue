@@ -68,7 +68,7 @@
             }
             if (nav_temp > 0.6) {
                 uni.setNavigationBarTitle({
-                    title: this.name
+                    title: this.passage.name
                 })
             } else {
                 uni.setNavigationBarTitle({
