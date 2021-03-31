@@ -136,28 +136,19 @@
             }
 
         }, {
-            "path": "pages/swiper_desc/swiper_desc",
-            "style": {
-                "navigationBarTitleText": "详情",
-                "enablePullDownRefresh": false
-            }
-
-        }, {
             "path": "pages/do_activity_info/do_activity_info",
             "style": {
                 "navigationBarTitleText": "活动详情",
                 "enablePullDownRefresh": false
             }
 
-        }
-        ,{
-            "path" : "pages/activity_join/activity_join",
-            "style" :                                                                                    
-            {
+        }, {
+            "path": "pages/activity_join/activity_join",
+            "style": {
                 "navigationBarTitleText": "报名信息",
                 "enablePullDownRefresh": false
             }
-            
+
         }
     ],
     "globalStyle": {

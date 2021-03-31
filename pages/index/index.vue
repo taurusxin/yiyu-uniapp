@@ -85,30 +85,6 @@
                         console.log(res.data)
                         //获取头图
                         this.swiper_list = res.data.swiper_list
-                        // TODO 后期要删掉这里的数据
-                        // this.swiper_list = [{
-                        //         id: 1, //轮播ID
-                        //         image: 'https://cdn.uviewui.com/uview/swiper/1.jpg',    //轮播图片
-                        //         src: "https://www.everdo.cn",   //webview网址
-                        //         type: "web",    //跳转webview还是活动页面
-                        //         activity: 1,    //活动ID
-                        //     },
-                        //     {
-                        //         id: 2,
-                        //         image: 'https://cdn.uviewui.com/uview/swiper/2.jpg',
-                        //         src: "https://www.everdo.cn",
-                        //         type: "activity",
-                        //         activity: 1,
-                        //     },
-                        //     {
-                        //         id: 3,
-                        //         image: 'https://cdn.uviewui.com/uview/swiper/3.jpg',
-                        //         src: "https://www.everdo.cn",
-                        //         type: "web",
-                        //         activity: 1,
-                        //     }
-                        // ]
-                        // TODO 后期要删掉上面的数据
                     },
                 ).catch(
                     err => {}
