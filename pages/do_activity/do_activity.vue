@@ -5,7 +5,7 @@
             <view class="" slot="body">
                 <view class="u-body-item u-flex u-col-between u-p-t-0">
                     <view class="u-body-item-title u-line-2">{{card.desc}}</view>
-                    <image :src="card.img" mode="aspectFill"></image>
+                    <image style="margin: 0 0 0 auto" :src="card.img" mode="aspectFill"></image>
                 </view>
             </view>
             <view class="card_foot" slot="foot">
