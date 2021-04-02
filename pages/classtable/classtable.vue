@@ -43,9 +43,9 @@
                                 <text class="title padding-right-unset">时间：</text>
                                 <text>{{ items.time }}</text>
                             </view>
-                            <view style="height: 60rpx;">
+                            <view>
                                 <text class="title padding-right-unset">课程：</text>
-                                <text>{{ items.courseName }}</text>
+                                <text>{{ (items.courseName.length>20)?items.courseName.substring(0,17)+"…":items.courseName.length+items.courseName }}</text>
                             </view>
                             <view>
                                 <text class="title padding-right-unset">地址：</text>
@@ -172,11 +172,19 @@
                     endTime: this.sundayDayTimeStamp
                 }
                 $api.getClassTable(data).then((res) => {
-                    if (res.statusCode == 200){
+                    if (res.statusCode == 200) {
                         console.log(res)
                         this.list = res.data.classtable
-                    }else{
-                        this.list = [[],[],[],[],[],[],[]]
+                    } else {
+                        this.list = [
+                            [],
+                            [],
+                            [],
+                            [],
+                            [],
+                            [],
+                            []
+                        ]
                         this.$refs.uTips.show({
                             title: res.data.errmsg,
                             type: 'warning',
@@ -210,11 +218,19 @@
                     endTime: this.sundayDayTimeStamp
                 }
                 $api.getClassTable(data).then((res) => {
-                    if (res.statusCode == 200){
+                    if (res.statusCode == 200) {
                         console.log(res)
                         this.list = res.data.classtable
-                    }else{
-                        this.list = [[],[],[],[],[],[],[]]
+                    } else {
+                        this.list = [
+                            [],
+                            [],
+                            [],
+                            [],
+                            [],
+                            [],
+                            []
+                        ]
                         this.$refs.uTips.show({
                             title: res.data.errmsg,
                             type: 'warning',
@@ -235,11 +251,19 @@
                     endTime: this.sundayDayTimeStamp
                 }
                 $api.getClassTable(data).then((res) => {
-                    if (res.statusCode == 200){
+                    if (res.statusCode == 200) {
                         console.log(res)
                         this.list = res.data.classtable
-                    }else{
-                        this.list = [[],[],[],[],[],[],[]]
+                    } else {
+                        this.list = [
+                            [],
+                            [],
+                            [],
+                            [],
+                            [],
+                            [],
+                            []
+                        ]
                         this.$refs.uTips.show({
                             title: res.data.errmsg,
                             type: 'warning',
